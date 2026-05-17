@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ctrl_sub_01",
+    "type": "substitution",
+    "condition": "generic_js",
+    "description": "fetch user by name — body substituted with theme, call arg stays name",
+    "clean": "const name = ''\nconst theme = 'dark'\n\nfunction fetchUser() {\n  fetch(`/api/users/${name}`)\n    .then(r => r.json())\n    .then(setData)\n}\nfetchUser(name)",
+    "corrupted": "const name = ''\nconst theme = 'dark'\n\nfunction fetchUser() {\n  fetch(`/api/users/${theme}`)\n    .then(r => r.json())\n    .then(setData)\n}\nfetchUser(name)",
+    "clean_target": "name",
+    "corrupted_target": "theme",
+    "measurement_context": "first token after fetchUser(",
+    "notes": "Body changes from name to theme, but call argument remains name in both. Logit diff measures name vs theme at the call position."
+  },
+  {
+    "id": "ctrl_sub_02",
+    "type": "substitution",
+    "condition": "generic_js",
+    "description": "log count — body substituted with page, call arg stays count",
+    "clean": "const count = 0\nconst page = 1\n\nfunction logCount() {\n  console.log(count)\n  document.title = `Count: ${count}`\n}\nlogCount(count)",
+    "corrupted": "const count = 0\nconst page = 1\n\nfunction logCount() {\n  console.log(page)\n  document.title = `Count: ${page}`\n}\nlogCount(count)",
+    "clean_target": "count",
+    "corrupted_target": "page",
+    "measurement_context": "first token after logCount(",
+    "notes": "Body changes from count to page, call argument remains count in both."
+  },
+  {
+    "id": "ctrl_sub_03",
+    "type": "substitution",
+    "condition": "generic_js",
+    "description": "fetch by query — body substituted with mode, call arg stays query",
+    "clean": "const query = ''\nconst mode = 'list'\n\nfunction doSearch() {\n  fetch(`/api/search?q=${query}`)\n    .then(r => r.json())\n    .then(setData)\n}\ndoSearch(query)",
+    "corrupted": "const query = ''\nconst mode = 'list'\n\nfunction doSearch() {\n  fetch(`/api/search?q=${mode}`)\n    .then(r => r.json())\n    .then(setData)\n}\ndoSearch(query)",
+    "clean_target": "query",
+    "corrupted_target": "mode",
+    "measurement_context": "first token after doSearch(",
+    "notes": "Body changes from query to mode, call argument remains query in both."
+  },
+  {
+    "id": "ctrl_sub_04",
+    "type": "substitution",
+    "condition": "generic_js",
+    "description": "set title — body substituted with color, call arg stays title",
+    "clean": "const title = 'Home'\nconst color = 'blue'\n\nfunction updateTitle() {\n  document.title = title\n}\nupdateTitle(title)",
+    "corrupted": "const title = 'Home'\nconst color = 'blue'\n\nfunction updateTitle() {\n  document.title = color\n}\nupdateTitle(title)",
+    "clean_target": "title",
+    "corrupted_target": "color",
+    "measurement_context": "first token after updateTitle(",
+    "notes": "Body changes from title to color, call argument remains title in both."
+  },
+  {
+    "id": "ctrl_sub_05",
+    "type": "substitution",
+    "condition": "generic_js",
+    "description": "fetch items by page — body substituted with limit, call arg stays page",
+    "clean": "const page = 1\nconst limit = 10\n\nfunction fetchItems() {\n  fetch(`/api/items?page=${page}`)\n    .then(r => r.json())\n    .then(setData)\n}\nfetchItems(page)",
+    "corrupted": "const page = 1\nconst limit = 10\n\nfunction fetchItems() {\n  fetch(`/api/items?page=${limit}`)\n    .then(r => r.json())\n    .then(setData)\n}\nfetchItems(page)",
+    "clean_target": "page",
+    "corrupted_target": "limit",
+    "measurement_context": "first token after fetchItems(",
+    "notes": "Body changes from page to limit, call argument remains page in both."
+  }
+]
