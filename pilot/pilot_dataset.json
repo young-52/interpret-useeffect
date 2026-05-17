@@ -1,0 +1,112 @@
+[
+  {
+    "id": "sub_01",
+    "type": "substitution",
+    "description": "fetch user by id — userId substituted with theme",
+    "clean": "const [name, setName] = useState('')\nconst [theme, setTheme] = useState('dark')\n\nuseEffect(() => {\n  fetch(`/api/users/${name}`)\n    .then(r => r.json())\n    .then(setData)\n}, [name])",
+    "corrupted": "const [name, setName] = useState('')\nconst [theme, setTheme] = useState('dark')\n\nuseEffect(() => {\n  fetch(`/api/users/${theme}`)\n    .then(r => r.json())\n    .then(setData)\n}, [theme])",
+    "clean_target": "name",
+    "corrupted_target": "theme",
+    "measurement_position": "first token after [",
+    "notes": "Only the variable in fetch() body differs. Model should predict name in clean, theme in corrupted."
+  },
+  {
+    "id": "sub_02",
+    "type": "substitution",
+    "description": "log count — count substituted with page",
+    "clean": "const [count, setCount] = useState(0)\nconst [page, setPage] = useState(1)\n\nuseEffect(() => {\n  console.log(count)\n  document.title = `Count: ${count}`\n}, [count])",
+    "corrupted": "const [count, setCount] = useState(0)\nconst [page, setPage] = useState(1)\n\nuseEffect(() => {\n  console.log(page)\n  document.title = `Count: ${page}`\n}, [page])",
+    "clean_target": "count",
+    "corrupted_target": "page",
+    "measurement_position": "first token after [",
+    "notes": "Both count and page are state vars. Body reference is the only difference."
+  },
+  {
+    "id": "sub_03",
+    "type": "substitution",
+    "description": "fetch posts by query — query substituted with mode",
+    "clean": "const [query, setQuery] = useState('')\nconst [mode, setMode] = useState('list')\n\nuseEffect(() => {\n  fetch(`/api/search?q=${query}`)\n    .then(r => r.json())\n    .then(setData)\n}, [query])",
+    "corrupted": "const [query, setQuery] = useState('')\nconst [mode, setMode] = useState('list')\n\nuseEffect(() => {\n  fetch(`/api/search?q=${mode}`)\n    .then(r => r.json())\n    .then(setData)\n}, [mode])",
+    "clean_target": "query",
+    "corrupted_target": "mode",
+    "measurement_position": "first token after [",
+    "notes": "query and mode are both short single-token candidates."
+  },
+  {
+    "id": "sub_04",
+    "type": "substitution",
+    "description": "set document title — title substituted with color",
+    "clean": "const [title, setTitle] = useState('Home')\nconst [color, setColor] = useState('blue')\n\nuseEffect(() => {\n  document.title = title\n}, [title])",
+    "corrupted": "const [title, setTitle] = useState('Home')\nconst [color, setColor] = useState('blue')\n\nuseEffect(() => {\n  document.title = color\n}, [color])",
+    "clean_target": "title",
+    "corrupted_target": "color",
+    "measurement_position": "first token after [",
+    "notes": "Minimal body — single assignment statement."
+  },
+  {
+    "id": "sub_05",
+    "type": "substitution",
+    "description": "fetch items by page — page substituted with limit",
+    "clean": "const [page, setPage] = useState(1)\nconst [limit, setLimit] = useState(10)\n\nuseEffect(() => {\n  fetch(`/api/items?page=${page}`)\n    .then(r => r.json())\n    .then(setData)\n}, [page])",
+    "corrupted": "const [page, setPage] = useState(1)\nconst [limit, setLimit] = useState(10)\n\nuseEffect(() => {\n  fetch(`/api/items?page=${limit}`)\n    .then(r => r.json())\n    .then(setData)\n}, [limit])",
+    "clean_target": "page",
+    "corrupted_target": "limit",
+    "measurement_position": "first token after [",
+    "notes": "page and limit are both plausible API parameters."
+  },
+  {
+    "id": "rem_01",
+    "type": "removal",
+    "description": "fetch user by name — name removed to constant",
+    "clean": "const [name, setName] = useState('')\n\nuseEffect(() => {\n  fetch(`/api/users/${name}`)\n    .then(r => r.json())\n    .then(setData)\n}, [name])",
+    "corrupted": "const [name, setName] = useState('')\n\nuseEffect(() => {\n  fetch(`/api/users/alice`)\n    .then(r => r.json())\n    .then(setData)\n}, [])",
+    "clean_target": "name",
+    "corrupted_target": "]",
+    "measurement_position": "first token after [",
+    "notes": "In clean, model should predict 'name'. In corrupted, no state var in body, so model should predict ] (empty array)."
+  },
+  {
+    "id": "rem_02",
+    "type": "removal",
+    "description": "log count — count removed to constant",
+    "clean": "const [count, setCount] = useState(0)\n\nuseEffect(() => {\n  console.log(count)\n  document.title = `Count: ${count}`\n}, [count])",
+    "corrupted": "const [count, setCount] = useState(0)\n\nuseEffect(() => {\n  console.log(42)\n  document.title = `Count: 42`\n}, [])",
+    "clean_target": "count",
+    "corrupted_target": "]",
+    "measurement_position": "first token after [",
+    "notes": "All references to count replaced with literal 42."
+  },
+  {
+    "id": "rem_03",
+    "type": "removal",
+    "description": "fetch by query — query removed to constant",
+    "clean": "const [query, setQuery] = useState('')\n\nuseEffect(() => {\n  fetch(`/api/search?q=${query}`)\n    .then(r => r.json())\n    .then(setData)\n}, [query])",
+    "corrupted": "const [query, setQuery] = useState('')\n\nuseEffect(() => {\n  fetch(`/api/search?q=test`)\n    .then(r => r.json())\n    .then(setData)\n}, [])",
+    "clean_target": "query",
+    "corrupted_target": "]",
+    "measurement_position": "first token after [",
+    "notes": "query replaced with literal string 'test'."
+  },
+  {
+    "id": "rem_04",
+    "type": "removal",
+    "description": "set title — title removed to constant",
+    "clean": "const [title, setTitle] = useState('Home')\n\nuseEffect(() => {\n  document.title = title\n}, [title])",
+    "corrupted": "const [title, setTitle] = useState('Home')\n\nuseEffect(() => {\n  document.title = 'Hello'\n}, [])",
+    "clean_target": "title",
+    "corrupted_target": "]",
+    "measurement_position": "first token after [",
+    "notes": "title replaced with literal 'Hello'."
+  },
+  {
+    "id": "rem_05",
+    "type": "removal",
+    "description": "fetch items by page — page removed to constant",
+    "clean": "const [page, setPage] = useState(1)\n\nuseEffect(() => {\n  fetch(`/api/items?page=${page}`)\n    .then(r => r.json())\n    .then(setData)\n}, [page])",
+    "corrupted": "const [page, setPage] = useState(1)\n\nuseEffect(() => {\n  fetch(`/api/items?page=1`)\n    .then(r => r.json())\n    .then(setData)\n}, [])",
+    "clean_target": "page",
+    "corrupted_target": "]",
+    "measurement_position": "first token after [",
+    "notes": "page replaced with literal 1."
+  }
+]

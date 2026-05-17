@@ -1,0 +1,11 @@
+name: react
+channels:
+  - https://repo.anaconda.com/pkgs/main
+  - https://repo.anaconda.com/pkgs/r
+dependencies:
+  - python=3.12.13
+  - pytorch
+  - plotly
+  - ipython
+  - jupyter
+prefix: /home/young_temp/.conda/envs/react
