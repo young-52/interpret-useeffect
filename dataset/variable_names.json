@@ -1,0 +1,352 @@
+[
+    {
+        "Component": "UserCard",
+        "dep": "count",
+        "alt": "base",
+        "init": "0",
+        "param": "page"
+    },
+    {
+        "Component": "Dashboard",
+        "dep": "page",
+        "alt": "ref",
+        "init": "1",
+        "param": "index"
+    },
+    {
+        "Component": "SearchBox",
+        "dep": "query",
+        "alt": "val",
+        "init": "0",
+        "param": "limit"
+    },
+    {
+        "Component": "Profile",
+        "dep": "status",
+        "alt": "cap",
+        "init": "false",
+        "param": "active"
+    },
+    {
+        "Component": "Settings",
+        "dep": "mode",
+        "alt": "max",
+        "init": "0",
+        "param": "id"
+    },
+    {
+        "Component": "Sidebar",
+        "dep": "index",
+        "alt": "len",
+        "init": "0",
+        "param": "count"
+    },
+    {
+        "Component": "Toolbar",
+        "dep": "flag",
+        "alt": "min",
+        "init": "true",
+        "param": "enabled"
+    },
+    {
+        "Component": "Navbar",
+        "dep": "tag",
+        "alt": "num",
+        "init": "0",
+        "param": "size"
+    },
+    {
+        "Component": "Footer",
+        "dep": "title",
+        "alt": "ref",
+        "init": "1",
+        "param": "page"
+    },
+    {
+        "Component": "Header",
+        "dep": "color",
+        "alt": "val",
+        "init": "0",
+        "param": "id"
+    },
+    {
+        "Component": "Modal",
+        "dep": "text",
+        "alt": "base",
+        "init": "false",
+        "param": "open"
+    },
+    {
+        "Component": "Drawer",
+        "dep": "limit",
+        "alt": "cap",
+        "init": "10",
+        "param": "count"
+    },
+    {
+        "Component": "Banner",
+        "dep": "id",
+        "alt": "num",
+        "init": "0",
+        "param": "index"
+    },
+    {
+        "Component": "Tooltip",
+        "dep": "key",
+        "alt": "max",
+        "init": "1",
+        "param": "size"
+    },
+    {
+        "Component": "Badge",
+        "dep": "name",
+        "alt": "len",
+        "init": "0",
+        "param": "limit"
+    },
+    {
+        "Component": "Avatar",
+        "dep": "count",
+        "alt": "val",
+        "init": "0",
+        "param": "num"
+    },
+    {
+        "Component": "Button",
+        "dep": "mode",
+        "alt": "ref",
+        "init": "false",
+        "param": "flag"
+    },
+    {
+        "Component": "Widget",
+        "dep": "page",
+        "alt": "min",
+        "init": "0",
+        "param": "id"
+    },
+    {
+        "Component": "Chip",
+        "dep": "query",
+        "alt": "base",
+        "init": "1",
+        "param": "page"
+    },
+    {
+        "Component": "Panel",
+        "dep": "index",
+        "alt": "cap",
+        "init": "0",
+        "param": "limit"
+    },
+    {
+        "Component": "Table",
+        "dep": "status",
+        "alt": "num",
+        "init": "false",
+        "param": "active"
+    },
+    {
+        "Component": "Grid",
+        "dep": "tag",
+        "alt": "len",
+        "init": "0",
+        "param": "count"
+    },
+    {
+        "Component": "List",
+        "dep": "title",
+        "alt": "val",
+        "init": "0",
+        "param": "id"
+    },
+    {
+        "Component": "Card",
+        "dep": "color",
+        "alt": "max",
+        "init": "1",
+        "param": "index"
+    },
+    {
+        "Component": "Form",
+        "dep": "flag",
+        "alt": "ref",
+        "init": "true",
+        "param": "enabled"
+    },
+    {
+        "Component": "Input",
+        "dep": "text",
+        "alt": "min",
+        "init": "0",
+        "param": "size"
+    },
+    {
+        "Component": "Select",
+        "dep": "limit",
+        "alt": "base",
+        "init": "10",
+        "param": "num"
+    },
+    {
+        "Component": "Tabs",
+        "dep": "id",
+        "alt": "cap",
+        "init": "0",
+        "param": "page"
+    },
+    {
+        "Component": "Menu",
+        "dep": "key",
+        "alt": "len",
+        "init": "1",
+        "param": "count"
+    },
+    {
+        "Component": "Picker",
+        "dep": "name",
+        "alt": "val",
+        "init": "0",
+        "param": "limit"
+    },
+    {
+        "Component": "Slider",
+        "dep": "count",
+        "alt": "max",
+        "init": "0",
+        "param": "id"
+    },
+    {
+        "Component": "Toggle",
+        "dep": "mode",
+        "alt": "num",
+        "init": "false",
+        "param": "visible"
+    },
+    {
+        "Component": "Switch",
+        "dep": "flag",
+        "alt": "base",
+        "init": "true",
+        "param": "open"
+    },
+    {
+        "Component": "Alert",
+        "dep": "status",
+        "alt": "ref",
+        "init": "false",
+        "param": "show"
+    },
+    {
+        "Component": "Toast",
+        "dep": "text",
+        "alt": "cap",
+        "init": "0",
+        "param": "index"
+    },
+    {
+        "Component": "Loader",
+        "dep": "page",
+        "alt": "min",
+        "init": "1",
+        "param": "size"
+    },
+    {
+        "Component": "Spinner",
+        "dep": "index",
+        "alt": "val",
+        "init": "0",
+        "param": "num"
+    },
+    {
+        "Component": "Chart",
+        "dep": "query",
+        "alt": "len",
+        "init": "0",
+        "param": "limit"
+    },
+    {
+        "Component": "Map",
+        "dep": "tag",
+        "alt": "max",
+        "init": "0",
+        "param": "id"
+    },
+    {
+        "Component": "Icon",
+        "dep": "color",
+        "alt": "base",
+        "init": "1",
+        "param": "count"
+    },
+    {
+        "Component": "Label",
+        "dep": "title",
+        "alt": "num",
+        "init": "0",
+        "param": "page"
+    },
+    {
+        "Component": "Link",
+        "dep": "key",
+        "alt": "ref",
+        "init": "0",
+        "param": "index"
+    },
+    {
+        "Component": "Image",
+        "dep": "id",
+        "alt": "min",
+        "init": "0",
+        "param": "size"
+    },
+    {
+        "Component": "Video",
+        "dep": "name",
+        "alt": "cap",
+        "init": "0",
+        "param": "limit"
+    },
+    {
+        "Component": "Audio",
+        "dep": "limit",
+        "alt": "val",
+        "init": "100",
+        "param": "num"
+    },
+    {
+        "Component": "Canvas",
+        "dep": "mode",
+        "alt": "len",
+        "init": "false",
+        "param": "enabled"
+    },
+    {
+        "Component": "Editor",
+        "dep": "text",
+        "alt": "max",
+        "init": "0",
+        "param": "id"
+    },
+    {
+        "Component": "Preview",
+        "dep": "count",
+        "alt": "ref",
+        "init": "1",
+        "param": "index"
+    },
+    {
+        "Component": "Filter",
+        "dep": "status",
+        "alt": "base",
+        "init": "false",
+        "param": "active"
+    },
+    {
+        "Component": "Viewer",
+        "dep": "flag",
+        "alt": "cap",
+        "init": "true",
+        "param": "show"
+    }
+]

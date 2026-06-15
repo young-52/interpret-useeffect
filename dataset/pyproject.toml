@@ -1,0 +1,9 @@
+[project]
+name = "useeffect-dataset"
+version = "0.1.0"
+description = "A dataset on React useEffect"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "transformers>=5.12.0",
+]
