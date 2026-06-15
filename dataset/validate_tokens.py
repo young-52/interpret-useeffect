@@ -19,7 +19,7 @@ GEMMA_MODEL = "google/gemma-3-1b-pt"
 
 # clean_target / corrupted_target으로 쓰일 필드
 # Component는 측정 대상이 아니므로 제외
-FIELDS_TO_CHECK = ["dep", "alt", "init", "param"]
+FIELDS_TO_CHECK = ["Component", "dep", "alt", "init", "param"]
 
 
 def is_single_token(tokenizer, word):

@@ -1,41 +1,16 @@
 [
   {
-    "Component": "UserCard",
-    "dep": "count",
-    "alt": "base",
-    "init": "0",
-    "param": "page",
-    "_token_forms": {
-      "dep": " count",
-      "alt": " base",
-      "init": "0",
-      "param": " page"
-    }
-  },
-  {
     "Component": "Dashboard",
     "dep": "page",
     "alt": "ref",
     "init": "1",
     "param": "index",
     "_token_forms": {
+      "Component": " Dashboard",
       "dep": " page",
       "alt": " ref",
       "init": "1",
       "param": " index"
-    }
-  },
-  {
-    "Component": "SearchBox",
-    "dep": "query",
-    "alt": "val",
-    "init": "0",
-    "param": "limit",
-    "_token_forms": {
-      "dep": " query",
-      "alt": " val",
-      "init": "0",
-      "param": " limit"
     }
   },
   {
@@ -45,6 +20,7 @@
     "init": "false",
     "param": "active",
     "_token_forms": {
+      "Component": " Profile",
       "dep": " status",
       "alt": " cap",
       "init": " false",
@@ -58,6 +34,7 @@
     "init": "0",
     "param": "id",
     "_token_forms": {
+      "Component": " Settings",
       "dep": " mode",
       "alt": " max",
       "init": "0",
@@ -71,6 +48,7 @@
     "init": "0",
     "param": "count",
     "_token_forms": {
+      "Component": " Sidebar",
       "dep": " index",
       "alt": " len",
       "init": "0",
@@ -84,6 +62,7 @@
     "init": "true",
     "param": "enabled",
     "_token_forms": {
+      "Component": " Toolbar",
       "dep": " flag",
       "alt": " min",
       "init": " true",
@@ -97,6 +76,7 @@
     "init": "0",
     "param": "size",
     "_token_forms": {
+      "Component": " Navbar",
       "dep": " tag",
       "alt": " num",
       "init": "0",
@@ -110,6 +90,7 @@
     "init": "1",
     "param": "page",
     "_token_forms": {
+      "Component": " Footer",
       "dep": " title",
       "alt": " ref",
       "init": "1",
@@ -123,6 +104,7 @@
     "init": "0",
     "param": "id",
     "_token_forms": {
+      "Component": " Header",
       "dep": " color",
       "alt": " val",
       "init": "0",
@@ -136,6 +118,7 @@
     "init": "false",
     "param": "open",
     "_token_forms": {
+      "Component": " Modal",
       "dep": " text",
       "alt": " base",
       "init": " false",
@@ -149,6 +132,7 @@
     "init": "0",
     "param": "index",
     "_token_forms": {
+      "Component": " Banner",
       "dep": " id",
       "alt": " num",
       "init": "0",
@@ -162,6 +146,7 @@
     "init": "1",
     "param": "size",
     "_token_forms": {
+      "Component": " Tooltip",
       "dep": " key",
       "alt": " max",
       "init": "1",
@@ -175,6 +160,7 @@
     "init": "0",
     "param": "limit",
     "_token_forms": {
+      "Component": " Badge",
       "dep": " name",
       "alt": " len",
       "init": "0",
@@ -188,6 +174,7 @@
     "init": "0",
     "param": "num",
     "_token_forms": {
+      "Component": " Avatar",
       "dep": " count",
       "alt": " val",
       "init": "0",
@@ -201,6 +188,7 @@
     "init": "false",
     "param": "flag",
     "_token_forms": {
+      "Component": " Button",
       "dep": " mode",
       "alt": " ref",
       "init": " false",
@@ -214,6 +202,7 @@
     "init": "0",
     "param": "id",
     "_token_forms": {
+      "Component": " Widget",
       "dep": " page",
       "alt": " min",
       "init": "0",
@@ -227,6 +216,7 @@
     "init": "1",
     "param": "page",
     "_token_forms": {
+      "Component": " Chip",
       "dep": " query",
       "alt": " base",
       "init": "1",
@@ -240,6 +230,7 @@
     "init": "0",
     "param": "limit",
     "_token_forms": {
+      "Component": " Panel",
       "dep": " index",
       "alt": " cap",
       "init": "0",
@@ -253,6 +244,7 @@
     "init": "false",
     "param": "active",
     "_token_forms": {
+      "Component": " Table",
       "dep": " status",
       "alt": " num",
       "init": " false",
@@ -266,6 +258,7 @@
     "init": "0",
     "param": "count",
     "_token_forms": {
+      "Component": " Grid",
       "dep": " tag",
       "alt": " len",
       "init": "0",
@@ -279,6 +272,7 @@
     "init": "0",
     "param": "id",
     "_token_forms": {
+      "Component": " List",
       "dep": " title",
       "alt": " val",
       "init": "0",
@@ -292,6 +286,7 @@
     "init": "1",
     "param": "index",
     "_token_forms": {
+      "Component": " Card",
       "dep": " color",
       "alt": " max",
       "init": "1",
@@ -305,6 +300,7 @@
     "init": "true",
     "param": "enabled",
     "_token_forms": {
+      "Component": " Form",
       "dep": " flag",
       "alt": " ref",
       "init": " true",
@@ -318,6 +314,7 @@
     "init": "0",
     "param": "size",
     "_token_forms": {
+      "Component": " Input",
       "dep": " text",
       "alt": " min",
       "init": "0",
@@ -331,6 +328,7 @@
     "init": "0",
     "param": "page",
     "_token_forms": {
+      "Component": " Tabs",
       "dep": " id",
       "alt": " cap",
       "init": "0",
@@ -344,6 +342,7 @@
     "init": "1",
     "param": "count",
     "_token_forms": {
+      "Component": " Menu",
       "dep": " key",
       "alt": " len",
       "init": "1",
@@ -357,6 +356,7 @@
     "init": "0",
     "param": "limit",
     "_token_forms": {
+      "Component": " Picker",
       "dep": " name",
       "alt": " val",
       "init": "0",
@@ -370,6 +370,7 @@
     "init": "0",
     "param": "id",
     "_token_forms": {
+      "Component": " Slider",
       "dep": " count",
       "alt": " max",
       "init": "0",
@@ -383,6 +384,7 @@
     "init": "false",
     "param": "visible",
     "_token_forms": {
+      "Component": " Toggle",
       "dep": " mode",
       "alt": " num",
       "init": " false",
@@ -396,6 +398,7 @@
     "init": "true",
     "param": "open",
     "_token_forms": {
+      "Component": " Switch",
       "dep": " flag",
       "alt": " base",
       "init": " true",
@@ -409,6 +412,7 @@
     "init": "false",
     "param": "show",
     "_token_forms": {
+      "Component": " Alert",
       "dep": " status",
       "alt": " ref",
       "init": " false",
@@ -422,6 +426,7 @@
     "init": "0",
     "param": "index",
     "_token_forms": {
+      "Component": " Toast",
       "dep": " text",
       "alt": " cap",
       "init": "0",
@@ -435,6 +440,7 @@
     "init": "1",
     "param": "size",
     "_token_forms": {
+      "Component": " Loader",
       "dep": " page",
       "alt": " min",
       "init": "1",
@@ -448,6 +454,7 @@
     "init": "0",
     "param": "num",
     "_token_forms": {
+      "Component": " Spinner",
       "dep": " index",
       "alt": " val",
       "init": "0",
@@ -461,6 +468,7 @@
     "init": "0",
     "param": "limit",
     "_token_forms": {
+      "Component": " Chart",
       "dep": " query",
       "alt": " len",
       "init": "0",
@@ -474,6 +482,7 @@
     "init": "0",
     "param": "id",
     "_token_forms": {
+      "Component": " Map",
       "dep": " tag",
       "alt": " max",
       "init": "0",
@@ -487,6 +496,7 @@
     "init": "1",
     "param": "count",
     "_token_forms": {
+      "Component": " Icon",
       "dep": " color",
       "alt": " base",
       "init": "1",
@@ -500,6 +510,7 @@
     "init": "0",
     "param": "page",
     "_token_forms": {
+      "Component": " Label",
       "dep": " title",
       "alt": " num",
       "init": "0",
@@ -513,6 +524,7 @@
     "init": "0",
     "param": "index",
     "_token_forms": {
+      "Component": " Link",
       "dep": " key",
       "alt": " ref",
       "init": "0",
@@ -526,6 +538,7 @@
     "init": "0",
     "param": "size",
     "_token_forms": {
+      "Component": " Image",
       "dep": " id",
       "alt": " min",
       "init": "0",
@@ -539,6 +552,7 @@
     "init": "0",
     "param": "limit",
     "_token_forms": {
+      "Component": " Video",
       "dep": " name",
       "alt": " cap",
       "init": "0",
@@ -552,6 +566,7 @@
     "init": "false",
     "param": "enabled",
     "_token_forms": {
+      "Component": " Canvas",
       "dep": " mode",
       "alt": " len",
       "init": " false",
@@ -565,6 +580,7 @@
     "init": "0",
     "param": "id",
     "_token_forms": {
+      "Component": " Editor",
       "dep": " text",
       "alt": " max",
       "init": "0",
@@ -578,6 +594,7 @@
     "init": "1",
     "param": "index",
     "_token_forms": {
+      "Component": " Preview",
       "dep": " count",
       "alt": " ref",
       "init": "1",
@@ -591,6 +608,7 @@
     "init": "false",
     "param": "active",
     "_token_forms": {
+      "Component": " Filter",
       "dep": " status",
       "alt": " base",
       "init": " false",
@@ -604,6 +622,7 @@
     "init": "true",
     "param": "show",
     "_token_forms": {
+      "Component": " Viewer",
       "dep": " flag",
       "alt": " cap",
       "init": " true",

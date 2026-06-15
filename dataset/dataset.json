@@ -2,17 +2,6 @@
   {
     "id": "sub_01",
     "type": "substitution",
-    "description": "page fetch — body: count→base, array stays [count]",
-    "react_clean": "function UserCard() {\n  const [count, setCount] = useState(0);\n  const base = 0;\n\n  useEffect(() => {\n    fetch(`/api?page=${count}`);\n  }, [count])\n}",
-    "react_corrupted": "function UserCard() {\n  const [count, setCount] = useState(0);\n  const base = 0;\n\n  useEffect(() => {\n    fetch(`/api?page=${base}`);\n  }, [count])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction userCard() {\n  const [count, setCount] = useState(0);\n  const base = 0;\n\n  subscribe(() => {\n    fetch(`/api?page=${count}`);\n  }, [count])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction userCard() {\n  const [count, setCount] = useState(0);\n  const base = 0;\n\n  subscribe(() => {\n    fetch(`/api?page=${base}`);\n  }, [count])\n}",
-    "clean_target": " count",
-    "corrupted_target": " base"
-  },
-  {
-    "id": "sub_02",
-    "type": "substitution",
     "description": "index fetch — body: page→ref, array stays [page]",
     "react_clean": "function Dashboard() {\n  const [page, setPage] = useState(1);\n  const ref = 1;\n\n  useEffect(() => {\n    fetch(`/api?index=${page}`);\n  }, [page])\n}",
     "react_corrupted": "function Dashboard() {\n  const [page, setPage] = useState(1);\n  const ref = 1;\n\n  useEffect(() => {\n    fetch(`/api?index=${ref}`);\n  }, [page])\n}",
@@ -22,18 +11,7 @@
     "corrupted_target": " ref"
   },
   {
-    "id": "sub_03",
-    "type": "substitution",
-    "description": "limit fetch — body: query→val, array stays [query]",
-    "react_clean": "function SearchBox() {\n  const [query, setQuery] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${query}`);\n  }, [query])\n}",
-    "react_corrupted": "function SearchBox() {\n  const [query, setQuery] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${val}`);\n  }, [query])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction searchBox() {\n  const [query, setQuery] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${query}`);\n  }, [query])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction searchBox() {\n  const [query, setQuery] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${val}`);\n  }, [query])\n}",
-    "clean_target": " query",
-    "corrupted_target": " val"
-  },
-  {
-    "id": "sub_04",
+    "id": "sub_02",
     "type": "substitution",
     "description": "active fetch — body: status→cap, array stays [status]",
     "react_clean": "function Profile() {\n  const [status, setStatus] = useState(false);\n  const cap = false;\n\n  useEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [status])\n}",
@@ -44,7 +22,7 @@
     "corrupted_target": " cap"
   },
   {
-    "id": "sub_05",
+    "id": "sub_03",
     "type": "substitution",
     "description": "id fetch — body: mode→max, array stays [mode]",
     "react_clean": "function Settings() {\n  const [mode, setMode] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${mode}`);\n  }, [mode])\n}",
@@ -55,7 +33,7 @@
     "corrupted_target": " max"
   },
   {
-    "id": "sub_06",
+    "id": "sub_04",
     "type": "substitution",
     "description": "count fetch — body: index→len, array stays [index]",
     "react_clean": "function Sidebar() {\n  const [index, setIndex] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?count=${index}`);\n  }, [index])\n}",
@@ -66,7 +44,7 @@
     "corrupted_target": " len"
   },
   {
-    "id": "sub_07",
+    "id": "sub_05",
     "type": "substitution",
     "description": "enabled fetch — body: flag→min, array stays [flag]",
     "react_clean": "function Toolbar() {\n  const [flag, setFlag] = useState(true);\n  const min = true;\n\n  useEffect(() => {\n    fetch(`/api?enabled=${flag}`);\n  }, [flag])\n}",
@@ -77,7 +55,7 @@
     "corrupted_target": " min"
   },
   {
-    "id": "sub_08",
+    "id": "sub_06",
     "type": "substitution",
     "description": "size fetch — body: tag→num, array stays [tag]",
     "react_clean": "function Navbar() {\n  const [tag, setTag] = useState(0);\n  const num = 0;\n\n  useEffect(() => {\n    fetch(`/api?size=${tag}`);\n  }, [tag])\n}",
@@ -88,7 +66,7 @@
     "corrupted_target": " num"
   },
   {
-    "id": "sub_09",
+    "id": "sub_07",
     "type": "substitution",
     "description": "page fetch — body: title→ref, array stays [title]",
     "react_clean": "function Footer() {\n  const [title, setTitle] = useState(1);\n  const ref = 1;\n\n  useEffect(() => {\n    fetch(`/api?page=${title}`);\n  }, [title])\n}",
@@ -99,7 +77,7 @@
     "corrupted_target": " ref"
   },
   {
-    "id": "sub_10",
+    "id": "sub_08",
     "type": "substitution",
     "description": "id fetch — body: color→val, array stays [color]",
     "react_clean": "function Header() {\n  const [color, setColor] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${color}`);\n  }, [color])\n}",
@@ -110,7 +88,7 @@
     "corrupted_target": " val"
   },
   {
-    "id": "sub_11",
+    "id": "sub_09",
     "type": "substitution",
     "description": "open fetch — body: text→base, array stays [text]",
     "react_clean": "function Modal() {\n  const [text, setText] = useState(false);\n  const base = false;\n\n  useEffect(() => {\n    fetch(`/api?open=${text}`);\n  }, [text])\n}",
@@ -121,7 +99,7 @@
     "corrupted_target": " base"
   },
   {
-    "id": "sub_12",
+    "id": "sub_10",
     "type": "substitution",
     "description": "index fetch — body: id→num, array stays [id]",
     "react_clean": "function Banner() {\n  const [id, setId] = useState(0);\n  const num = 0;\n\n  useEffect(() => {\n    fetch(`/api?index=${id}`);\n  }, [id])\n}",
@@ -132,7 +110,7 @@
     "corrupted_target": " num"
   },
   {
-    "id": "sub_13",
+    "id": "sub_11",
     "type": "substitution",
     "description": "size fetch — body: key→max, array stays [key]",
     "react_clean": "function Tooltip() {\n  const [key, setKey] = useState(1);\n  const max = 1;\n\n  useEffect(() => {\n    fetch(`/api?size=${key}`);\n  }, [key])\n}",
@@ -143,7 +121,7 @@
     "corrupted_target": " max"
   },
   {
-    "id": "sub_14",
+    "id": "sub_12",
     "type": "substitution",
     "description": "limit fetch — body: name→len, array stays [name]",
     "react_clean": "function Badge() {\n  const [name, setName] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [name])\n}",
@@ -154,7 +132,7 @@
     "corrupted_target": " len"
   },
   {
-    "id": "sub_15",
+    "id": "sub_13",
     "type": "substitution",
     "description": "num fetch — body: count→val, array stays [count]",
     "react_clean": "function Avatar() {\n  const [count, setCount] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?num=${count}`);\n  }, [count])\n}",
@@ -165,7 +143,7 @@
     "corrupted_target": " val"
   },
   {
-    "id": "sub_16",
+    "id": "sub_14",
     "type": "substitution",
     "description": "flag fetch — body: mode→ref, array stays [mode]",
     "react_clean": "function Button() {\n  const [mode, setMode] = useState(false);\n  const ref = false;\n\n  useEffect(() => {\n    fetch(`/api?flag=${mode}`);\n  }, [mode])\n}",
@@ -176,7 +154,7 @@
     "corrupted_target": " ref"
   },
   {
-    "id": "sub_17",
+    "id": "sub_15",
     "type": "substitution",
     "description": "id fetch — body: page→min, array stays [page]",
     "react_clean": "function Widget() {\n  const [page, setPage] = useState(0);\n  const min = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${page}`);\n  }, [page])\n}",
@@ -187,7 +165,7 @@
     "corrupted_target": " min"
   },
   {
-    "id": "sub_18",
+    "id": "sub_16",
     "type": "substitution",
     "description": "page fetch — body: query→base, array stays [query]",
     "react_clean": "function Chip() {\n  const [query, setQuery] = useState(1);\n  const base = 1;\n\n  useEffect(() => {\n    fetch(`/api?page=${query}`);\n  }, [query])\n}",
@@ -198,7 +176,7 @@
     "corrupted_target": " base"
   },
   {
-    "id": "sub_19",
+    "id": "sub_17",
     "type": "substitution",
     "description": "limit fetch — body: index→cap, array stays [index]",
     "react_clean": "function Panel() {\n  const [index, setIndex] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${index}`);\n  }, [index])\n}",
@@ -209,7 +187,7 @@
     "corrupted_target": " cap"
   },
   {
-    "id": "sub_20",
+    "id": "sub_18",
     "type": "substitution",
     "description": "active fetch — body: status→num, array stays [status]",
     "react_clean": "function Table() {\n  const [status, setStatus] = useState(false);\n  const num = false;\n\n  useEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [status])\n}",
@@ -220,7 +198,7 @@
     "corrupted_target": " num"
   },
   {
-    "id": "sub_21",
+    "id": "sub_19",
     "type": "substitution",
     "description": "count fetch — body: tag→len, array stays [tag]",
     "react_clean": "function Grid() {\n  const [tag, setTag] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?count=${tag}`);\n  }, [tag])\n}",
@@ -231,7 +209,7 @@
     "corrupted_target": " len"
   },
   {
-    "id": "sub_22",
+    "id": "sub_20",
     "type": "substitution",
     "description": "id fetch — body: title→val, array stays [title]",
     "react_clean": "function List() {\n  const [title, setTitle] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${title}`);\n  }, [title])\n}",
@@ -242,7 +220,7 @@
     "corrupted_target": " val"
   },
   {
-    "id": "sub_23",
+    "id": "sub_21",
     "type": "substitution",
     "description": "index fetch — body: color→max, array stays [color]",
     "react_clean": "function Card() {\n  const [color, setColor] = useState(1);\n  const max = 1;\n\n  useEffect(() => {\n    fetch(`/api?index=${color}`);\n  }, [color])\n}",
@@ -253,7 +231,7 @@
     "corrupted_target": " max"
   },
   {
-    "id": "sub_24",
+    "id": "sub_22",
     "type": "substitution",
     "description": "enabled fetch — body: flag→ref, array stays [flag]",
     "react_clean": "function Form() {\n  const [flag, setFlag] = useState(true);\n  const ref = true;\n\n  useEffect(() => {\n    fetch(`/api?enabled=${flag}`);\n  }, [flag])\n}",
@@ -264,7 +242,7 @@
     "corrupted_target": " ref"
   },
   {
-    "id": "sub_25",
+    "id": "sub_23",
     "type": "substitution",
     "description": "size fetch — body: text→min, array stays [text]",
     "react_clean": "function Input() {\n  const [text, setText] = useState(0);\n  const min = 0;\n\n  useEffect(() => {\n    fetch(`/api?size=${text}`);\n  }, [text])\n}",
@@ -275,7 +253,7 @@
     "corrupted_target": " min"
   },
   {
-    "id": "sub_26",
+    "id": "sub_24",
     "type": "substitution",
     "description": "page fetch — body: id→cap, array stays [id]",
     "react_clean": "function Tabs() {\n  const [id, setId] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?page=${id}`);\n  }, [id])\n}",
@@ -286,7 +264,7 @@
     "corrupted_target": " cap"
   },
   {
-    "id": "sub_27",
+    "id": "sub_25",
     "type": "substitution",
     "description": "count fetch — body: key→len, array stays [key]",
     "react_clean": "function Menu() {\n  const [key, setKey] = useState(1);\n  const len = 1;\n\n  useEffect(() => {\n    fetch(`/api?count=${key}`);\n  }, [key])\n}",
@@ -297,7 +275,7 @@
     "corrupted_target": " len"
   },
   {
-    "id": "sub_28",
+    "id": "sub_26",
     "type": "substitution",
     "description": "limit fetch — body: name→val, array stays [name]",
     "react_clean": "function Picker() {\n  const [name, setName] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [name])\n}",
@@ -308,7 +286,7 @@
     "corrupted_target": " val"
   },
   {
-    "id": "sub_29",
+    "id": "sub_27",
     "type": "substitution",
     "description": "id fetch — body: count→max, array stays [count]",
     "react_clean": "function Slider() {\n  const [count, setCount] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${count}`);\n  }, [count])\n}",
@@ -319,7 +297,7 @@
     "corrupted_target": " max"
   },
   {
-    "id": "sub_30",
+    "id": "sub_28",
     "type": "substitution",
     "description": "visible fetch — body: mode→num, array stays [mode]",
     "react_clean": "function Toggle() {\n  const [mode, setMode] = useState(false);\n  const num = false;\n\n  useEffect(() => {\n    fetch(`/api?visible=${mode}`);\n  }, [mode])\n}",
@@ -330,7 +308,7 @@
     "corrupted_target": " num"
   },
   {
-    "id": "sub_31",
+    "id": "sub_29",
     "type": "substitution",
     "description": "open fetch — body: flag→base, array stays [flag]",
     "react_clean": "function Switch() {\n  const [flag, setFlag] = useState(true);\n  const base = true;\n\n  useEffect(() => {\n    fetch(`/api?open=${flag}`);\n  }, [flag])\n}",
@@ -341,7 +319,7 @@
     "corrupted_target": " base"
   },
   {
-    "id": "sub_32",
+    "id": "sub_30",
     "type": "substitution",
     "description": "show fetch — body: status→ref, array stays [status]",
     "react_clean": "function Alert() {\n  const [status, setStatus] = useState(false);\n  const ref = false;\n\n  useEffect(() => {\n    fetch(`/api?show=${status}`);\n  }, [status])\n}",
@@ -352,7 +330,7 @@
     "corrupted_target": " ref"
   },
   {
-    "id": "sub_33",
+    "id": "sub_31",
     "type": "substitution",
     "description": "index fetch — body: text→cap, array stays [text]",
     "react_clean": "function Toast() {\n  const [text, setText] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?index=${text}`);\n  }, [text])\n}",
@@ -363,7 +341,7 @@
     "corrupted_target": " cap"
   },
   {
-    "id": "sub_34",
+    "id": "sub_32",
     "type": "substitution",
     "description": "size fetch — body: page→min, array stays [page]",
     "react_clean": "function Loader() {\n  const [page, setPage] = useState(1);\n  const min = 1;\n\n  useEffect(() => {\n    fetch(`/api?size=${page}`);\n  }, [page])\n}",
@@ -374,7 +352,7 @@
     "corrupted_target": " min"
   },
   {
-    "id": "sub_35",
+    "id": "sub_33",
     "type": "substitution",
     "description": "num fetch — body: index→val, array stays [index]",
     "react_clean": "function Spinner() {\n  const [index, setIndex] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?num=${index}`);\n  }, [index])\n}",
@@ -385,7 +363,7 @@
     "corrupted_target": " val"
   },
   {
-    "id": "sub_36",
+    "id": "sub_34",
     "type": "substitution",
     "description": "limit fetch — body: query→len, array stays [query]",
     "react_clean": "function Chart() {\n  const [query, setQuery] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${query}`);\n  }, [query])\n}",
@@ -396,7 +374,7 @@
     "corrupted_target": " len"
   },
   {
-    "id": "sub_37",
+    "id": "sub_35",
     "type": "substitution",
     "description": "id fetch — body: tag→max, array stays [tag]",
     "react_clean": "function Map() {\n  const [tag, setTag] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${tag}`);\n  }, [tag])\n}",
@@ -407,7 +385,7 @@
     "corrupted_target": " max"
   },
   {
-    "id": "sub_38",
+    "id": "sub_36",
     "type": "substitution",
     "description": "count fetch — body: color→base, array stays [color]",
     "react_clean": "function Icon() {\n  const [color, setColor] = useState(1);\n  const base = 1;\n\n  useEffect(() => {\n    fetch(`/api?count=${color}`);\n  }, [color])\n}",
@@ -418,7 +396,7 @@
     "corrupted_target": " base"
   },
   {
-    "id": "sub_39",
+    "id": "sub_37",
     "type": "substitution",
     "description": "page fetch — body: title→num, array stays [title]",
     "react_clean": "function Label() {\n  const [title, setTitle] = useState(0);\n  const num = 0;\n\n  useEffect(() => {\n    fetch(`/api?page=${title}`);\n  }, [title])\n}",
@@ -429,7 +407,7 @@
     "corrupted_target": " num"
   },
   {
-    "id": "sub_40",
+    "id": "sub_38",
     "type": "substitution",
     "description": "index fetch — body: key→ref, array stays [key]",
     "react_clean": "function Link() {\n  const [key, setKey] = useState(0);\n  const ref = 0;\n\n  useEffect(() => {\n    fetch(`/api?index=${key}`);\n  }, [key])\n}",
@@ -440,7 +418,7 @@
     "corrupted_target": " ref"
   },
   {
-    "id": "sub_41",
+    "id": "sub_39",
     "type": "substitution",
     "description": "size fetch — body: id→min, array stays [id]",
     "react_clean": "function Image() {\n  const [id, setId] = useState(0);\n  const min = 0;\n\n  useEffect(() => {\n    fetch(`/api?size=${id}`);\n  }, [id])\n}",
@@ -451,7 +429,7 @@
     "corrupted_target": " min"
   },
   {
-    "id": "sub_42",
+    "id": "sub_40",
     "type": "substitution",
     "description": "limit fetch — body: name→cap, array stays [name]",
     "react_clean": "function Video() {\n  const [name, setName] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [name])\n}",
@@ -462,7 +440,7 @@
     "corrupted_target": " cap"
   },
   {
-    "id": "sub_43",
+    "id": "sub_41",
     "type": "substitution",
     "description": "enabled fetch — body: mode→len, array stays [mode]",
     "react_clean": "function Canvas() {\n  const [mode, setMode] = useState(false);\n  const len = false;\n\n  useEffect(() => {\n    fetch(`/api?enabled=${mode}`);\n  }, [mode])\n}",
@@ -473,7 +451,7 @@
     "corrupted_target": " len"
   },
   {
-    "id": "sub_44",
+    "id": "sub_42",
     "type": "substitution",
     "description": "id fetch — body: text→max, array stays [text]",
     "react_clean": "function Editor() {\n  const [text, setText] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${text}`);\n  }, [text])\n}",
@@ -484,7 +462,7 @@
     "corrupted_target": " max"
   },
   {
-    "id": "sub_45",
+    "id": "sub_43",
     "type": "substitution",
     "description": "index fetch — body: count→ref, array stays [count]",
     "react_clean": "function Preview() {\n  const [count, setCount] = useState(1);\n  const ref = 1;\n\n  useEffect(() => {\n    fetch(`/api?index=${count}`);\n  }, [count])\n}",
@@ -495,7 +473,7 @@
     "corrupted_target": " ref"
   },
   {
-    "id": "sub_46",
+    "id": "sub_44",
     "type": "substitution",
     "description": "active fetch — body: status→base, array stays [status]",
     "react_clean": "function Filter() {\n  const [status, setStatus] = useState(false);\n  const base = false;\n\n  useEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [status])\n}",
@@ -506,7 +484,7 @@
     "corrupted_target": " base"
   },
   {
-    "id": "sub_47",
+    "id": "sub_45",
     "type": "substitution",
     "description": "show fetch — body: flag→cap, array stays [flag]",
     "react_clean": "function Viewer() {\n  const [flag, setFlag] = useState(true);\n  const cap = true;\n\n  useEffect(() => {\n    fetch(`/api?show=${flag}`);\n  }, [flag])\n}",
