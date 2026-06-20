@@ -2,496 +2,1981 @@
   {
     "id": "sub_01",
     "type": "substitution",
-    "description": "index fetch — body: page→ref, array stays [page]",
-    "react_clean": "function Dashboard() {\n  const [page, setPage] = useState(1);\n  const ref = 1;\n\n  useEffect(() => {\n    fetch(`/api?index=${page}`);\n  }, [page])\n}",
-    "react_corrupted": "function Dashboard() {\n  const [page, setPage] = useState(1);\n  const ref = 1;\n\n  useEffect(() => {\n    fetch(`/api?index=${ref}`);\n  }, [page])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction dashboard() {\n  const [page, setPage] = useState(1);\n  const ref = 1;\n\n  subscribe(() => {\n    fetch(`/api?index=${page}`);\n  }, [page])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction dashboard() {\n  const [page, setPage] = useState(1);\n  const ref = 1;\n\n  subscribe(() => {\n    fetch(`/api?index=${ref}`);\n  }, [page])\n}",
-    "clean_target": " page",
-    "corrupted_target": " ref"
+    "description": "prefix-only variable tracking — callback/effect body var: page (clean) vs ref (corrupted); param=index; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "page",
+      "alt": "ref",
+      "init": "1",
+      "param": "index"
+    },
+    "clean_target": "page",
+    "corrupted_target": "ref",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Dashboard",
+      "dep": " page",
+      "alt": " ref",
+      "init": "1",
+      "param": " index"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [page, setPage] = useState(1);\n  const ref = 1;\n\n  useEffect(() => {\n    fetch(`/api?index=${page}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [page, setPage] = useState(1);\n  const ref = 1;\n\n  useEffect(() => {\n    fetch(`/api?index=${ref}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [page, setPage] = useState(1);\n  const ref = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?index=${page}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [page, setPage] = useState(1);\n  const ref = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?index=${ref}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [page, setPage] = useState(1);\n  const ref = 1;\n\n  myEffect(() => {\n    fetch(`/api?index=${page}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [page, setPage] = useState(1);\n  const ref = 1;\n\n  myEffect(() => {\n    fetch(`/api?index=${ref}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [page, setPage] = useState(1);\n  const ref = 1;\n\n  myEffect(() => {\n    fetch(`/api?index=${page}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [page, setPage] = useState(1);\n  const ref = 1;\n\n  myEffect(() => {\n    fetch(`/api?index=${ref}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [page, setPage] = useState(1);\n  const ref = 1;\n\n  subscribe(() => {\n    fetch(`/api?index=${page}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [page, setPage] = useState(1);\n  const ref = 1;\n\n  subscribe(() => {\n    fetch(`/api?index=${ref}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_02",
     "type": "substitution",
-    "description": "active fetch — body: status→cap, array stays [status]",
-    "react_clean": "function Profile() {\n  const [status, setStatus] = useState(false);\n  const cap = false;\n\n  useEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [status])\n}",
-    "react_corrupted": "function Profile() {\n  const [status, setStatus] = useState(false);\n  const cap = false;\n\n  useEffect(() => {\n    fetch(`/api?active=${cap}`);\n  }, [status])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction profile() {\n  const [status, setStatus] = useState(false);\n  const cap = false;\n\n  subscribe(() => {\n    fetch(`/api?active=${status}`);\n  }, [status])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction profile() {\n  const [status, setStatus] = useState(false);\n  const cap = false;\n\n  subscribe(() => {\n    fetch(`/api?active=${cap}`);\n  }, [status])\n}",
-    "clean_target": " status",
-    "corrupted_target": " cap"
+    "description": "prefix-only variable tracking — callback/effect body var: status (clean) vs cap (corrupted); param=active; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "status",
+      "alt": "cap",
+      "init": "false",
+      "param": "active"
+    },
+    "clean_target": "status",
+    "corrupted_target": "cap",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Profile",
+      "dep": " status",
+      "alt": " cap",
+      "init": " false",
+      "param": " active"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [status, setStatus] = useState(false);\n  const cap = false;\n\n  useEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [status, setStatus] = useState(false);\n  const cap = false;\n\n  useEffect(() => {\n    fetch(`/api?active=${cap}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [status, setStatus] = useState(false);\n  const cap = false;\n\n  useLayoutEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [status, setStatus] = useState(false);\n  const cap = false;\n\n  useLayoutEffect(() => {\n    fetch(`/api?active=${cap}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const cap = false;\n\n  myEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const cap = false;\n\n  myEffect(() => {\n    fetch(`/api?active=${cap}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const cap = false;\n\n  myEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const cap = false;\n\n  myEffect(() => {\n    fetch(`/api?active=${cap}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const cap = false;\n\n  subscribe(() => {\n    fetch(`/api?active=${status}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const cap = false;\n\n  subscribe(() => {\n    fetch(`/api?active=${cap}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_03",
     "type": "substitution",
-    "description": "id fetch — body: mode→max, array stays [mode]",
-    "react_clean": "function Settings() {\n  const [mode, setMode] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${mode}`);\n  }, [mode])\n}",
-    "react_corrupted": "function Settings() {\n  const [mode, setMode] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, [mode])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction settings() {\n  const [mode, setMode] = useState(0);\n  const max = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${mode}`);\n  }, [mode])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction settings() {\n  const [mode, setMode] = useState(0);\n  const max = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${max}`);\n  }, [mode])\n}",
-    "clean_target": " mode",
-    "corrupted_target": " max"
+    "description": "prefix-only variable tracking — callback/effect body var: mode (clean) vs max (corrupted); param=id; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "mode",
+      "alt": "max",
+      "init": "0",
+      "param": "id"
+    },
+    "clean_target": "mode",
+    "corrupted_target": "max",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Settings",
+      "dep": " mode",
+      "alt": " max",
+      "init": "0",
+      "param": " id"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [mode, setMode] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${mode}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [mode, setMode] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [mode, setMode] = useState(0);\n  const max = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?id=${mode}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [mode, setMode] = useState(0);\n  const max = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [mode, setMode] = useState(0);\n  const max = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${mode}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [mode, setMode] = useState(0);\n  const max = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [mode, setMode] = useState(0);\n  const max = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${mode}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [mode, setMode] = useState(0);\n  const max = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [mode, setMode] = useState(0);\n  const max = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${mode}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [mode, setMode] = useState(0);\n  const max = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_04",
     "type": "substitution",
-    "description": "count fetch — body: index→len, array stays [index]",
-    "react_clean": "function Sidebar() {\n  const [index, setIndex] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?count=${index}`);\n  }, [index])\n}",
-    "react_corrupted": "function Sidebar() {\n  const [index, setIndex] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?count=${len}`);\n  }, [index])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction sidebar() {\n  const [index, setIndex] = useState(0);\n  const len = 0;\n\n  subscribe(() => {\n    fetch(`/api?count=${index}`);\n  }, [index])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction sidebar() {\n  const [index, setIndex] = useState(0);\n  const len = 0;\n\n  subscribe(() => {\n    fetch(`/api?count=${len}`);\n  }, [index])\n}",
-    "clean_target": " index",
-    "corrupted_target": " len"
+    "description": "prefix-only variable tracking — callback/effect body var: index (clean) vs len (corrupted); param=count; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "index",
+      "alt": "len",
+      "init": "0",
+      "param": "count"
+    },
+    "clean_target": "index",
+    "corrupted_target": "len",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Sidebar",
+      "dep": " index",
+      "alt": " len",
+      "init": "0",
+      "param": " count"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [index, setIndex] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?count=${index}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [index, setIndex] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?count=${len}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [index, setIndex] = useState(0);\n  const len = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?count=${index}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [index, setIndex] = useState(0);\n  const len = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?count=${len}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const len = 0;\n\n  myEffect(() => {\n    fetch(`/api?count=${index}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const len = 0;\n\n  myEffect(() => {\n    fetch(`/api?count=${len}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const len = 0;\n\n  myEffect(() => {\n    fetch(`/api?count=${index}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const len = 0;\n\n  myEffect(() => {\n    fetch(`/api?count=${len}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const len = 0;\n\n  subscribe(() => {\n    fetch(`/api?count=${index}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const len = 0;\n\n  subscribe(() => {\n    fetch(`/api?count=${len}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_05",
     "type": "substitution",
-    "description": "enabled fetch — body: flag→min, array stays [flag]",
-    "react_clean": "function Toolbar() {\n  const [flag, setFlag] = useState(true);\n  const min = true;\n\n  useEffect(() => {\n    fetch(`/api?enabled=${flag}`);\n  }, [flag])\n}",
-    "react_corrupted": "function Toolbar() {\n  const [flag, setFlag] = useState(true);\n  const min = true;\n\n  useEffect(() => {\n    fetch(`/api?enabled=${min}`);\n  }, [flag])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction toolbar() {\n  const [flag, setFlag] = useState(true);\n  const min = true;\n\n  subscribe(() => {\n    fetch(`/api?enabled=${flag}`);\n  }, [flag])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction toolbar() {\n  const [flag, setFlag] = useState(true);\n  const min = true;\n\n  subscribe(() => {\n    fetch(`/api?enabled=${min}`);\n  }, [flag])\n}",
-    "clean_target": " flag",
-    "corrupted_target": " min"
+    "description": "prefix-only variable tracking — callback/effect body var: flag (clean) vs min (corrupted); param=enabled; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "flag",
+      "alt": "min",
+      "init": "true",
+      "param": "enabled"
+    },
+    "clean_target": "flag",
+    "corrupted_target": "min",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Toolbar",
+      "dep": " flag",
+      "alt": " min",
+      "init": " true",
+      "param": " enabled"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [flag, setFlag] = useState(true);\n  const min = true;\n\n  useEffect(() => {\n    fetch(`/api?enabled=${flag}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [flag, setFlag] = useState(true);\n  const min = true;\n\n  useEffect(() => {\n    fetch(`/api?enabled=${min}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [flag, setFlag] = useState(true);\n  const min = true;\n\n  useLayoutEffect(() => {\n    fetch(`/api?enabled=${flag}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [flag, setFlag] = useState(true);\n  const min = true;\n\n  useLayoutEffect(() => {\n    fetch(`/api?enabled=${min}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const min = true;\n\n  myEffect(() => {\n    fetch(`/api?enabled=${flag}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const min = true;\n\n  myEffect(() => {\n    fetch(`/api?enabled=${min}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const min = true;\n\n  myEffect(() => {\n    fetch(`/api?enabled=${flag}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const min = true;\n\n  myEffect(() => {\n    fetch(`/api?enabled=${min}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const min = true;\n\n  subscribe(() => {\n    fetch(`/api?enabled=${flag}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const min = true;\n\n  subscribe(() => {\n    fetch(`/api?enabled=${min}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_06",
     "type": "substitution",
-    "description": "size fetch — body: tag→num, array stays [tag]",
-    "react_clean": "function Navbar() {\n  const [tag, setTag] = useState(0);\n  const num = 0;\n\n  useEffect(() => {\n    fetch(`/api?size=${tag}`);\n  }, [tag])\n}",
-    "react_corrupted": "function Navbar() {\n  const [tag, setTag] = useState(0);\n  const num = 0;\n\n  useEffect(() => {\n    fetch(`/api?size=${num}`);\n  }, [tag])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction navbar() {\n  const [tag, setTag] = useState(0);\n  const num = 0;\n\n  subscribe(() => {\n    fetch(`/api?size=${tag}`);\n  }, [tag])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction navbar() {\n  const [tag, setTag] = useState(0);\n  const num = 0;\n\n  subscribe(() => {\n    fetch(`/api?size=${num}`);\n  }, [tag])\n}",
-    "clean_target": " tag",
-    "corrupted_target": " num"
+    "description": "prefix-only variable tracking — callback/effect body var: tag (clean) vs num (corrupted); param=size; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "tag",
+      "alt": "num",
+      "init": "0",
+      "param": "size"
+    },
+    "clean_target": "tag",
+    "corrupted_target": "num",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Navbar",
+      "dep": " tag",
+      "alt": " num",
+      "init": "0",
+      "param": " size"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [tag, setTag] = useState(0);\n  const num = 0;\n\n  useEffect(() => {\n    fetch(`/api?size=${tag}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [tag, setTag] = useState(0);\n  const num = 0;\n\n  useEffect(() => {\n    fetch(`/api?size=${num}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [tag, setTag] = useState(0);\n  const num = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?size=${tag}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [tag, setTag] = useState(0);\n  const num = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?size=${num}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const num = 0;\n\n  myEffect(() => {\n    fetch(`/api?size=${tag}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const num = 0;\n\n  myEffect(() => {\n    fetch(`/api?size=${num}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const num = 0;\n\n  myEffect(() => {\n    fetch(`/api?size=${tag}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const num = 0;\n\n  myEffect(() => {\n    fetch(`/api?size=${num}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const num = 0;\n\n  subscribe(() => {\n    fetch(`/api?size=${tag}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const num = 0;\n\n  subscribe(() => {\n    fetch(`/api?size=${num}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_07",
     "type": "substitution",
-    "description": "page fetch — body: title→ref, array stays [title]",
-    "react_clean": "function Footer() {\n  const [title, setTitle] = useState(1);\n  const ref = 1;\n\n  useEffect(() => {\n    fetch(`/api?page=${title}`);\n  }, [title])\n}",
-    "react_corrupted": "function Footer() {\n  const [title, setTitle] = useState(1);\n  const ref = 1;\n\n  useEffect(() => {\n    fetch(`/api?page=${ref}`);\n  }, [title])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction footer() {\n  const [title, setTitle] = useState(1);\n  const ref = 1;\n\n  subscribe(() => {\n    fetch(`/api?page=${title}`);\n  }, [title])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction footer() {\n  const [title, setTitle] = useState(1);\n  const ref = 1;\n\n  subscribe(() => {\n    fetch(`/api?page=${ref}`);\n  }, [title])\n}",
-    "clean_target": " title",
-    "corrupted_target": " ref"
+    "description": "prefix-only variable tracking — callback/effect body var: title (clean) vs ref (corrupted); param=page; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "title",
+      "alt": "ref",
+      "init": "1",
+      "param": "page"
+    },
+    "clean_target": "title",
+    "corrupted_target": "ref",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Footer",
+      "dep": " title",
+      "alt": " ref",
+      "init": "1",
+      "param": " page"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [title, setTitle] = useState(1);\n  const ref = 1;\n\n  useEffect(() => {\n    fetch(`/api?page=${title}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [title, setTitle] = useState(1);\n  const ref = 1;\n\n  useEffect(() => {\n    fetch(`/api?page=${ref}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [title, setTitle] = useState(1);\n  const ref = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?page=${title}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [title, setTitle] = useState(1);\n  const ref = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?page=${ref}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [title, setTitle] = useState(1);\n  const ref = 1;\n\n  myEffect(() => {\n    fetch(`/api?page=${title}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [title, setTitle] = useState(1);\n  const ref = 1;\n\n  myEffect(() => {\n    fetch(`/api?page=${ref}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [title, setTitle] = useState(1);\n  const ref = 1;\n\n  myEffect(() => {\n    fetch(`/api?page=${title}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [title, setTitle] = useState(1);\n  const ref = 1;\n\n  myEffect(() => {\n    fetch(`/api?page=${ref}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [title, setTitle] = useState(1);\n  const ref = 1;\n\n  subscribe(() => {\n    fetch(`/api?page=${title}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [title, setTitle] = useState(1);\n  const ref = 1;\n\n  subscribe(() => {\n    fetch(`/api?page=${ref}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_08",
     "type": "substitution",
-    "description": "id fetch — body: color→val, array stays [color]",
-    "react_clean": "function Header() {\n  const [color, setColor] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${color}`);\n  }, [color])\n}",
-    "react_corrupted": "function Header() {\n  const [color, setColor] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${val}`);\n  }, [color])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction header() {\n  const [color, setColor] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${color}`);\n  }, [color])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction header() {\n  const [color, setColor] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${val}`);\n  }, [color])\n}",
-    "clean_target": " color",
-    "corrupted_target": " val"
+    "description": "prefix-only variable tracking — callback/effect body var: color (clean) vs val (corrupted); param=id; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "color",
+      "alt": "val",
+      "init": "0",
+      "param": "id"
+    },
+    "clean_target": "color",
+    "corrupted_target": "val",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Header",
+      "dep": " color",
+      "alt": " val",
+      "init": "0",
+      "param": " id"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [color, setColor] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${color}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [color, setColor] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${val}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [color, setColor] = useState(0);\n  const val = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?id=${color}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [color, setColor] = useState(0);\n  const val = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?id=${val}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [color, setColor] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${color}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [color, setColor] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${val}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [color, setColor] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${color}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [color, setColor] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${val}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [color, setColor] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${color}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [color, setColor] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${val}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_09",
     "type": "substitution",
-    "description": "open fetch — body: text→base, array stays [text]",
-    "react_clean": "function Modal() {\n  const [text, setText] = useState(false);\n  const base = false;\n\n  useEffect(() => {\n    fetch(`/api?open=${text}`);\n  }, [text])\n}",
-    "react_corrupted": "function Modal() {\n  const [text, setText] = useState(false);\n  const base = false;\n\n  useEffect(() => {\n    fetch(`/api?open=${base}`);\n  }, [text])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction modal() {\n  const [text, setText] = useState(false);\n  const base = false;\n\n  subscribe(() => {\n    fetch(`/api?open=${text}`);\n  }, [text])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction modal() {\n  const [text, setText] = useState(false);\n  const base = false;\n\n  subscribe(() => {\n    fetch(`/api?open=${base}`);\n  }, [text])\n}",
-    "clean_target": " text",
-    "corrupted_target": " base"
+    "description": "prefix-only variable tracking — callback/effect body var: text (clean) vs base (corrupted); param=open; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "text",
+      "alt": "base",
+      "init": "false",
+      "param": "open"
+    },
+    "clean_target": "text",
+    "corrupted_target": "base",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Modal",
+      "dep": " text",
+      "alt": " base",
+      "init": " false",
+      "param": " open"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [text, setText] = useState(false);\n  const base = false;\n\n  useEffect(() => {\n    fetch(`/api?open=${text}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [text, setText] = useState(false);\n  const base = false;\n\n  useEffect(() => {\n    fetch(`/api?open=${base}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [text, setText] = useState(false);\n  const base = false;\n\n  useLayoutEffect(() => {\n    fetch(`/api?open=${text}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [text, setText] = useState(false);\n  const base = false;\n\n  useLayoutEffect(() => {\n    fetch(`/api?open=${base}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [text, setText] = useState(false);\n  const base = false;\n\n  myEffect(() => {\n    fetch(`/api?open=${text}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [text, setText] = useState(false);\n  const base = false;\n\n  myEffect(() => {\n    fetch(`/api?open=${base}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [text, setText] = useState(false);\n  const base = false;\n\n  myEffect(() => {\n    fetch(`/api?open=${text}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [text, setText] = useState(false);\n  const base = false;\n\n  myEffect(() => {\n    fetch(`/api?open=${base}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [text, setText] = useState(false);\n  const base = false;\n\n  subscribe(() => {\n    fetch(`/api?open=${text}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [text, setText] = useState(false);\n  const base = false;\n\n  subscribe(() => {\n    fetch(`/api?open=${base}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_10",
     "type": "substitution",
-    "description": "index fetch — body: id→num, array stays [id]",
-    "react_clean": "function Banner() {\n  const [id, setId] = useState(0);\n  const num = 0;\n\n  useEffect(() => {\n    fetch(`/api?index=${id}`);\n  }, [id])\n}",
-    "react_corrupted": "function Banner() {\n  const [id, setId] = useState(0);\n  const num = 0;\n\n  useEffect(() => {\n    fetch(`/api?index=${num}`);\n  }, [id])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction banner() {\n  const [id, setId] = useState(0);\n  const num = 0;\n\n  subscribe(() => {\n    fetch(`/api?index=${id}`);\n  }, [id])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction banner() {\n  const [id, setId] = useState(0);\n  const num = 0;\n\n  subscribe(() => {\n    fetch(`/api?index=${num}`);\n  }, [id])\n}",
-    "clean_target": " id",
-    "corrupted_target": " num"
+    "description": "prefix-only variable tracking — callback/effect body var: id (clean) vs num (corrupted); param=index; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "id",
+      "alt": "num",
+      "init": "0",
+      "param": "index"
+    },
+    "clean_target": "id",
+    "corrupted_target": "num",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Banner",
+      "dep": " id",
+      "alt": " num",
+      "init": "0",
+      "param": " index"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [id, setId] = useState(0);\n  const num = 0;\n\n  useEffect(() => {\n    fetch(`/api?index=${id}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [id, setId] = useState(0);\n  const num = 0;\n\n  useEffect(() => {\n    fetch(`/api?index=${num}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [id, setId] = useState(0);\n  const num = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?index=${id}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [id, setId] = useState(0);\n  const num = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?index=${num}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const num = 0;\n\n  myEffect(() => {\n    fetch(`/api?index=${id}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const num = 0;\n\n  myEffect(() => {\n    fetch(`/api?index=${num}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const num = 0;\n\n  myEffect(() => {\n    fetch(`/api?index=${id}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const num = 0;\n\n  myEffect(() => {\n    fetch(`/api?index=${num}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const num = 0;\n\n  subscribe(() => {\n    fetch(`/api?index=${id}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const num = 0;\n\n  subscribe(() => {\n    fetch(`/api?index=${num}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_11",
     "type": "substitution",
-    "description": "size fetch — body: key→max, array stays [key]",
-    "react_clean": "function Tooltip() {\n  const [key, setKey] = useState(1);\n  const max = 1;\n\n  useEffect(() => {\n    fetch(`/api?size=${key}`);\n  }, [key])\n}",
-    "react_corrupted": "function Tooltip() {\n  const [key, setKey] = useState(1);\n  const max = 1;\n\n  useEffect(() => {\n    fetch(`/api?size=${max}`);\n  }, [key])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction tooltip() {\n  const [key, setKey] = useState(1);\n  const max = 1;\n\n  subscribe(() => {\n    fetch(`/api?size=${key}`);\n  }, [key])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction tooltip() {\n  const [key, setKey] = useState(1);\n  const max = 1;\n\n  subscribe(() => {\n    fetch(`/api?size=${max}`);\n  }, [key])\n}",
-    "clean_target": " key",
-    "corrupted_target": " max"
+    "description": "prefix-only variable tracking — callback/effect body var: key (clean) vs max (corrupted); param=size; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "key",
+      "alt": "max",
+      "init": "1",
+      "param": "size"
+    },
+    "clean_target": "key",
+    "corrupted_target": "max",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Tooltip",
+      "dep": " key",
+      "alt": " max",
+      "init": "1",
+      "param": " size"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [key, setKey] = useState(1);\n  const max = 1;\n\n  useEffect(() => {\n    fetch(`/api?size=${key}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [key, setKey] = useState(1);\n  const max = 1;\n\n  useEffect(() => {\n    fetch(`/api?size=${max}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [key, setKey] = useState(1);\n  const max = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?size=${key}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [key, setKey] = useState(1);\n  const max = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?size=${max}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [key, setKey] = useState(1);\n  const max = 1;\n\n  myEffect(() => {\n    fetch(`/api?size=${key}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [key, setKey] = useState(1);\n  const max = 1;\n\n  myEffect(() => {\n    fetch(`/api?size=${max}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [key, setKey] = useState(1);\n  const max = 1;\n\n  myEffect(() => {\n    fetch(`/api?size=${key}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [key, setKey] = useState(1);\n  const max = 1;\n\n  myEffect(() => {\n    fetch(`/api?size=${max}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [key, setKey] = useState(1);\n  const max = 1;\n\n  subscribe(() => {\n    fetch(`/api?size=${key}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [key, setKey] = useState(1);\n  const max = 1;\n\n  subscribe(() => {\n    fetch(`/api?size=${max}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_12",
     "type": "substitution",
-    "description": "limit fetch — body: name→len, array stays [name]",
-    "react_clean": "function Badge() {\n  const [name, setName] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [name])\n}",
-    "react_corrupted": "function Badge() {\n  const [name, setName] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${len}`);\n  }, [name])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction badge() {\n  const [name, setName] = useState(0);\n  const len = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${name}`);\n  }, [name])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction badge() {\n  const [name, setName] = useState(0);\n  const len = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${len}`);\n  }, [name])\n}",
-    "clean_target": " name",
-    "corrupted_target": " len"
+    "description": "prefix-only variable tracking — callback/effect body var: name (clean) vs len (corrupted); param=limit; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "name",
+      "alt": "len",
+      "init": "0",
+      "param": "limit"
+    },
+    "clean_target": "name",
+    "corrupted_target": "len",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Badge",
+      "dep": " name",
+      "alt": " len",
+      "init": "0",
+      "param": " limit"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [name, setName] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [name, setName] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${len}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [name, setName] = useState(0);\n  const len = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [name, setName] = useState(0);\n  const len = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?limit=${len}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const len = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const len = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${len}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const len = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const len = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${len}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const len = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${name}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const len = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${len}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_13",
     "type": "substitution",
-    "description": "num fetch — body: count→val, array stays [count]",
-    "react_clean": "function Avatar() {\n  const [count, setCount] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?num=${count}`);\n  }, [count])\n}",
-    "react_corrupted": "function Avatar() {\n  const [count, setCount] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?num=${val}`);\n  }, [count])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction avatar() {\n  const [count, setCount] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?num=${count}`);\n  }, [count])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction avatar() {\n  const [count, setCount] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?num=${val}`);\n  }, [count])\n}",
-    "clean_target": " count",
-    "corrupted_target": " val"
+    "description": "prefix-only variable tracking — callback/effect body var: count (clean) vs val (corrupted); param=num; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "count",
+      "alt": "val",
+      "init": "0",
+      "param": "num"
+    },
+    "clean_target": "count",
+    "corrupted_target": "val",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Avatar",
+      "dep": " count",
+      "alt": " val",
+      "init": "0",
+      "param": " num"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [count, setCount] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?num=${count}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [count, setCount] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?num=${val}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [count, setCount] = useState(0);\n  const val = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?num=${count}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [count, setCount] = useState(0);\n  const val = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?num=${val}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [count, setCount] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?num=${count}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [count, setCount] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?num=${val}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [count, setCount] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?num=${count}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [count, setCount] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?num=${val}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [count, setCount] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?num=${count}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [count, setCount] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?num=${val}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_14",
     "type": "substitution",
-    "description": "flag fetch — body: mode→ref, array stays [mode]",
-    "react_clean": "function Button() {\n  const [mode, setMode] = useState(false);\n  const ref = false;\n\n  useEffect(() => {\n    fetch(`/api?flag=${mode}`);\n  }, [mode])\n}",
-    "react_corrupted": "function Button() {\n  const [mode, setMode] = useState(false);\n  const ref = false;\n\n  useEffect(() => {\n    fetch(`/api?flag=${ref}`);\n  }, [mode])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction button() {\n  const [mode, setMode] = useState(false);\n  const ref = false;\n\n  subscribe(() => {\n    fetch(`/api?flag=${mode}`);\n  }, [mode])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction button() {\n  const [mode, setMode] = useState(false);\n  const ref = false;\n\n  subscribe(() => {\n    fetch(`/api?flag=${ref}`);\n  }, [mode])\n}",
-    "clean_target": " mode",
-    "corrupted_target": " ref"
+    "description": "prefix-only variable tracking — callback/effect body var: mode (clean) vs ref (corrupted); param=flag; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "mode",
+      "alt": "ref",
+      "init": "false",
+      "param": "flag"
+    },
+    "clean_target": "mode",
+    "corrupted_target": "ref",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Button",
+      "dep": " mode",
+      "alt": " ref",
+      "init": " false",
+      "param": " flag"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [mode, setMode] = useState(false);\n  const ref = false;\n\n  useEffect(() => {\n    fetch(`/api?flag=${mode}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [mode, setMode] = useState(false);\n  const ref = false;\n\n  useEffect(() => {\n    fetch(`/api?flag=${ref}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [mode, setMode] = useState(false);\n  const ref = false;\n\n  useLayoutEffect(() => {\n    fetch(`/api?flag=${mode}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [mode, setMode] = useState(false);\n  const ref = false;\n\n  useLayoutEffect(() => {\n    fetch(`/api?flag=${ref}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const ref = false;\n\n  myEffect(() => {\n    fetch(`/api?flag=${mode}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const ref = false;\n\n  myEffect(() => {\n    fetch(`/api?flag=${ref}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const ref = false;\n\n  myEffect(() => {\n    fetch(`/api?flag=${mode}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const ref = false;\n\n  myEffect(() => {\n    fetch(`/api?flag=${ref}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const ref = false;\n\n  subscribe(() => {\n    fetch(`/api?flag=${mode}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const ref = false;\n\n  subscribe(() => {\n    fetch(`/api?flag=${ref}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_15",
     "type": "substitution",
-    "description": "id fetch — body: page→min, array stays [page]",
-    "react_clean": "function Widget() {\n  const [page, setPage] = useState(0);\n  const min = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${page}`);\n  }, [page])\n}",
-    "react_corrupted": "function Widget() {\n  const [page, setPage] = useState(0);\n  const min = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${min}`);\n  }, [page])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction widget() {\n  const [page, setPage] = useState(0);\n  const min = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${page}`);\n  }, [page])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction widget() {\n  const [page, setPage] = useState(0);\n  const min = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${min}`);\n  }, [page])\n}",
-    "clean_target": " page",
-    "corrupted_target": " min"
+    "description": "prefix-only variable tracking — callback/effect body var: page (clean) vs min (corrupted); param=id; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "page",
+      "alt": "min",
+      "init": "0",
+      "param": "id"
+    },
+    "clean_target": "page",
+    "corrupted_target": "min",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Widget",
+      "dep": " page",
+      "alt": " min",
+      "init": "0",
+      "param": " id"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [page, setPage] = useState(0);\n  const min = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${page}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [page, setPage] = useState(0);\n  const min = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${min}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [page, setPage] = useState(0);\n  const min = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?id=${page}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [page, setPage] = useState(0);\n  const min = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?id=${min}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [page, setPage] = useState(0);\n  const min = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${page}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [page, setPage] = useState(0);\n  const min = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${min}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [page, setPage] = useState(0);\n  const min = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${page}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [page, setPage] = useState(0);\n  const min = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${min}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [page, setPage] = useState(0);\n  const min = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${page}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [page, setPage] = useState(0);\n  const min = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${min}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_16",
     "type": "substitution",
-    "description": "page fetch — body: query→base, array stays [query]",
-    "react_clean": "function Chip() {\n  const [query, setQuery] = useState(1);\n  const base = 1;\n\n  useEffect(() => {\n    fetch(`/api?page=${query}`);\n  }, [query])\n}",
-    "react_corrupted": "function Chip() {\n  const [query, setQuery] = useState(1);\n  const base = 1;\n\n  useEffect(() => {\n    fetch(`/api?page=${base}`);\n  }, [query])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction chip() {\n  const [query, setQuery] = useState(1);\n  const base = 1;\n\n  subscribe(() => {\n    fetch(`/api?page=${query}`);\n  }, [query])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction chip() {\n  const [query, setQuery] = useState(1);\n  const base = 1;\n\n  subscribe(() => {\n    fetch(`/api?page=${base}`);\n  }, [query])\n}",
-    "clean_target": " query",
-    "corrupted_target": " base"
+    "description": "prefix-only variable tracking — callback/effect body var: query (clean) vs base (corrupted); param=page; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "query",
+      "alt": "base",
+      "init": "1",
+      "param": "page"
+    },
+    "clean_target": "query",
+    "corrupted_target": "base",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Chip",
+      "dep": " query",
+      "alt": " base",
+      "init": "1",
+      "param": " page"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [query, setQuery] = useState(1);\n  const base = 1;\n\n  useEffect(() => {\n    fetch(`/api?page=${query}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [query, setQuery] = useState(1);\n  const base = 1;\n\n  useEffect(() => {\n    fetch(`/api?page=${base}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [query, setQuery] = useState(1);\n  const base = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?page=${query}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [query, setQuery] = useState(1);\n  const base = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?page=${base}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [query, setQuery] = useState(1);\n  const base = 1;\n\n  myEffect(() => {\n    fetch(`/api?page=${query}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [query, setQuery] = useState(1);\n  const base = 1;\n\n  myEffect(() => {\n    fetch(`/api?page=${base}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [query, setQuery] = useState(1);\n  const base = 1;\n\n  myEffect(() => {\n    fetch(`/api?page=${query}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [query, setQuery] = useState(1);\n  const base = 1;\n\n  myEffect(() => {\n    fetch(`/api?page=${base}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [query, setQuery] = useState(1);\n  const base = 1;\n\n  subscribe(() => {\n    fetch(`/api?page=${query}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [query, setQuery] = useState(1);\n  const base = 1;\n\n  subscribe(() => {\n    fetch(`/api?page=${base}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_17",
     "type": "substitution",
-    "description": "limit fetch — body: index→cap, array stays [index]",
-    "react_clean": "function Panel() {\n  const [index, setIndex] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${index}`);\n  }, [index])\n}",
-    "react_corrupted": "function Panel() {\n  const [index, setIndex] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${cap}`);\n  }, [index])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction panel() {\n  const [index, setIndex] = useState(0);\n  const cap = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${index}`);\n  }, [index])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction panel() {\n  const [index, setIndex] = useState(0);\n  const cap = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${cap}`);\n  }, [index])\n}",
-    "clean_target": " index",
-    "corrupted_target": " cap"
+    "description": "prefix-only variable tracking — callback/effect body var: index (clean) vs cap (corrupted); param=limit; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "index",
+      "alt": "cap",
+      "init": "0",
+      "param": "limit"
+    },
+    "clean_target": "index",
+    "corrupted_target": "cap",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Panel",
+      "dep": " index",
+      "alt": " cap",
+      "init": "0",
+      "param": " limit"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [index, setIndex] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${index}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [index, setIndex] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${cap}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [index, setIndex] = useState(0);\n  const cap = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?limit=${index}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [index, setIndex] = useState(0);\n  const cap = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?limit=${cap}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const cap = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${index}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const cap = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${cap}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const cap = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${index}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const cap = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${cap}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const cap = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${index}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const cap = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${cap}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_18",
     "type": "substitution",
-    "description": "active fetch — body: status→num, array stays [status]",
-    "react_clean": "function Table() {\n  const [status, setStatus] = useState(false);\n  const num = false;\n\n  useEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [status])\n}",
-    "react_corrupted": "function Table() {\n  const [status, setStatus] = useState(false);\n  const num = false;\n\n  useEffect(() => {\n    fetch(`/api?active=${num}`);\n  }, [status])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction table() {\n  const [status, setStatus] = useState(false);\n  const num = false;\n\n  subscribe(() => {\n    fetch(`/api?active=${status}`);\n  }, [status])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction table() {\n  const [status, setStatus] = useState(false);\n  const num = false;\n\n  subscribe(() => {\n    fetch(`/api?active=${num}`);\n  }, [status])\n}",
-    "clean_target": " status",
-    "corrupted_target": " num"
+    "description": "prefix-only variable tracking — callback/effect body var: status (clean) vs num (corrupted); param=active; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "status",
+      "alt": "num",
+      "init": "false",
+      "param": "active"
+    },
+    "clean_target": "status",
+    "corrupted_target": "num",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Table",
+      "dep": " status",
+      "alt": " num",
+      "init": " false",
+      "param": " active"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [status, setStatus] = useState(false);\n  const num = false;\n\n  useEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [status, setStatus] = useState(false);\n  const num = false;\n\n  useEffect(() => {\n    fetch(`/api?active=${num}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [status, setStatus] = useState(false);\n  const num = false;\n\n  useLayoutEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [status, setStatus] = useState(false);\n  const num = false;\n\n  useLayoutEffect(() => {\n    fetch(`/api?active=${num}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const num = false;\n\n  myEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const num = false;\n\n  myEffect(() => {\n    fetch(`/api?active=${num}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const num = false;\n\n  myEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const num = false;\n\n  myEffect(() => {\n    fetch(`/api?active=${num}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const num = false;\n\n  subscribe(() => {\n    fetch(`/api?active=${status}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const num = false;\n\n  subscribe(() => {\n    fetch(`/api?active=${num}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_19",
     "type": "substitution",
-    "description": "count fetch — body: tag→len, array stays [tag]",
-    "react_clean": "function Grid() {\n  const [tag, setTag] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?count=${tag}`);\n  }, [tag])\n}",
-    "react_corrupted": "function Grid() {\n  const [tag, setTag] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?count=${len}`);\n  }, [tag])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction grid() {\n  const [tag, setTag] = useState(0);\n  const len = 0;\n\n  subscribe(() => {\n    fetch(`/api?count=${tag}`);\n  }, [tag])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction grid() {\n  const [tag, setTag] = useState(0);\n  const len = 0;\n\n  subscribe(() => {\n    fetch(`/api?count=${len}`);\n  }, [tag])\n}",
-    "clean_target": " tag",
-    "corrupted_target": " len"
+    "description": "prefix-only variable tracking — callback/effect body var: tag (clean) vs len (corrupted); param=count; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "tag",
+      "alt": "len",
+      "init": "0",
+      "param": "count"
+    },
+    "clean_target": "tag",
+    "corrupted_target": "len",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Grid",
+      "dep": " tag",
+      "alt": " len",
+      "init": "0",
+      "param": " count"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [tag, setTag] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?count=${tag}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [tag, setTag] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?count=${len}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [tag, setTag] = useState(0);\n  const len = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?count=${tag}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [tag, setTag] = useState(0);\n  const len = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?count=${len}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const len = 0;\n\n  myEffect(() => {\n    fetch(`/api?count=${tag}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const len = 0;\n\n  myEffect(() => {\n    fetch(`/api?count=${len}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const len = 0;\n\n  myEffect(() => {\n    fetch(`/api?count=${tag}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const len = 0;\n\n  myEffect(() => {\n    fetch(`/api?count=${len}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const len = 0;\n\n  subscribe(() => {\n    fetch(`/api?count=${tag}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const len = 0;\n\n  subscribe(() => {\n    fetch(`/api?count=${len}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_20",
     "type": "substitution",
-    "description": "id fetch — body: title→val, array stays [title]",
-    "react_clean": "function List() {\n  const [title, setTitle] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${title}`);\n  }, [title])\n}",
-    "react_corrupted": "function List() {\n  const [title, setTitle] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${val}`);\n  }, [title])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction list() {\n  const [title, setTitle] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${title}`);\n  }, [title])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction list() {\n  const [title, setTitle] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${val}`);\n  }, [title])\n}",
-    "clean_target": " title",
-    "corrupted_target": " val"
+    "description": "prefix-only variable tracking — callback/effect body var: title (clean) vs val (corrupted); param=id; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "title",
+      "alt": "val",
+      "init": "0",
+      "param": "id"
+    },
+    "clean_target": "title",
+    "corrupted_target": "val",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " List",
+      "dep": " title",
+      "alt": " val",
+      "init": "0",
+      "param": " id"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [title, setTitle] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${title}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [title, setTitle] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${val}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [title, setTitle] = useState(0);\n  const val = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?id=${title}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [title, setTitle] = useState(0);\n  const val = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?id=${val}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [title, setTitle] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${title}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [title, setTitle] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${val}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [title, setTitle] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${title}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [title, setTitle] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${val}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [title, setTitle] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${title}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [title, setTitle] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${val}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_21",
     "type": "substitution",
-    "description": "index fetch — body: color→max, array stays [color]",
-    "react_clean": "function Card() {\n  const [color, setColor] = useState(1);\n  const max = 1;\n\n  useEffect(() => {\n    fetch(`/api?index=${color}`);\n  }, [color])\n}",
-    "react_corrupted": "function Card() {\n  const [color, setColor] = useState(1);\n  const max = 1;\n\n  useEffect(() => {\n    fetch(`/api?index=${max}`);\n  }, [color])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction card() {\n  const [color, setColor] = useState(1);\n  const max = 1;\n\n  subscribe(() => {\n    fetch(`/api?index=${color}`);\n  }, [color])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction card() {\n  const [color, setColor] = useState(1);\n  const max = 1;\n\n  subscribe(() => {\n    fetch(`/api?index=${max}`);\n  }, [color])\n}",
-    "clean_target": " color",
-    "corrupted_target": " max"
+    "description": "prefix-only variable tracking — callback/effect body var: color (clean) vs max (corrupted); param=index; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "color",
+      "alt": "max",
+      "init": "1",
+      "param": "index"
+    },
+    "clean_target": "color",
+    "corrupted_target": "max",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Card",
+      "dep": " color",
+      "alt": " max",
+      "init": "1",
+      "param": " index"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [color, setColor] = useState(1);\n  const max = 1;\n\n  useEffect(() => {\n    fetch(`/api?index=${color}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [color, setColor] = useState(1);\n  const max = 1;\n\n  useEffect(() => {\n    fetch(`/api?index=${max}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [color, setColor] = useState(1);\n  const max = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?index=${color}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [color, setColor] = useState(1);\n  const max = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?index=${max}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [color, setColor] = useState(1);\n  const max = 1;\n\n  myEffect(() => {\n    fetch(`/api?index=${color}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [color, setColor] = useState(1);\n  const max = 1;\n\n  myEffect(() => {\n    fetch(`/api?index=${max}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [color, setColor] = useState(1);\n  const max = 1;\n\n  myEffect(() => {\n    fetch(`/api?index=${color}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [color, setColor] = useState(1);\n  const max = 1;\n\n  myEffect(() => {\n    fetch(`/api?index=${max}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [color, setColor] = useState(1);\n  const max = 1;\n\n  subscribe(() => {\n    fetch(`/api?index=${color}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [color, setColor] = useState(1);\n  const max = 1;\n\n  subscribe(() => {\n    fetch(`/api?index=${max}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_22",
     "type": "substitution",
-    "description": "enabled fetch — body: flag→ref, array stays [flag]",
-    "react_clean": "function Form() {\n  const [flag, setFlag] = useState(true);\n  const ref = true;\n\n  useEffect(() => {\n    fetch(`/api?enabled=${flag}`);\n  }, [flag])\n}",
-    "react_corrupted": "function Form() {\n  const [flag, setFlag] = useState(true);\n  const ref = true;\n\n  useEffect(() => {\n    fetch(`/api?enabled=${ref}`);\n  }, [flag])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction form() {\n  const [flag, setFlag] = useState(true);\n  const ref = true;\n\n  subscribe(() => {\n    fetch(`/api?enabled=${flag}`);\n  }, [flag])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction form() {\n  const [flag, setFlag] = useState(true);\n  const ref = true;\n\n  subscribe(() => {\n    fetch(`/api?enabled=${ref}`);\n  }, [flag])\n}",
-    "clean_target": " flag",
-    "corrupted_target": " ref"
+    "description": "prefix-only variable tracking — callback/effect body var: flag (clean) vs ref (corrupted); param=enabled; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "flag",
+      "alt": "ref",
+      "init": "true",
+      "param": "enabled"
+    },
+    "clean_target": "flag",
+    "corrupted_target": "ref",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Form",
+      "dep": " flag",
+      "alt": " ref",
+      "init": " true",
+      "param": " enabled"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [flag, setFlag] = useState(true);\n  const ref = true;\n\n  useEffect(() => {\n    fetch(`/api?enabled=${flag}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [flag, setFlag] = useState(true);\n  const ref = true;\n\n  useEffect(() => {\n    fetch(`/api?enabled=${ref}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [flag, setFlag] = useState(true);\n  const ref = true;\n\n  useLayoutEffect(() => {\n    fetch(`/api?enabled=${flag}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [flag, setFlag] = useState(true);\n  const ref = true;\n\n  useLayoutEffect(() => {\n    fetch(`/api?enabled=${ref}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const ref = true;\n\n  myEffect(() => {\n    fetch(`/api?enabled=${flag}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const ref = true;\n\n  myEffect(() => {\n    fetch(`/api?enabled=${ref}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const ref = true;\n\n  myEffect(() => {\n    fetch(`/api?enabled=${flag}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const ref = true;\n\n  myEffect(() => {\n    fetch(`/api?enabled=${ref}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const ref = true;\n\n  subscribe(() => {\n    fetch(`/api?enabled=${flag}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const ref = true;\n\n  subscribe(() => {\n    fetch(`/api?enabled=${ref}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_23",
     "type": "substitution",
-    "description": "size fetch — body: text→min, array stays [text]",
-    "react_clean": "function Input() {\n  const [text, setText] = useState(0);\n  const min = 0;\n\n  useEffect(() => {\n    fetch(`/api?size=${text}`);\n  }, [text])\n}",
-    "react_corrupted": "function Input() {\n  const [text, setText] = useState(0);\n  const min = 0;\n\n  useEffect(() => {\n    fetch(`/api?size=${min}`);\n  }, [text])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction input() {\n  const [text, setText] = useState(0);\n  const min = 0;\n\n  subscribe(() => {\n    fetch(`/api?size=${text}`);\n  }, [text])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction input() {\n  const [text, setText] = useState(0);\n  const min = 0;\n\n  subscribe(() => {\n    fetch(`/api?size=${min}`);\n  }, [text])\n}",
-    "clean_target": " text",
-    "corrupted_target": " min"
+    "description": "prefix-only variable tracking — callback/effect body var: text (clean) vs min (corrupted); param=size; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "text",
+      "alt": "min",
+      "init": "0",
+      "param": "size"
+    },
+    "clean_target": "text",
+    "corrupted_target": "min",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Input",
+      "dep": " text",
+      "alt": " min",
+      "init": "0",
+      "param": " size"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [text, setText] = useState(0);\n  const min = 0;\n\n  useEffect(() => {\n    fetch(`/api?size=${text}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [text, setText] = useState(0);\n  const min = 0;\n\n  useEffect(() => {\n    fetch(`/api?size=${min}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [text, setText] = useState(0);\n  const min = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?size=${text}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [text, setText] = useState(0);\n  const min = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?size=${min}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const min = 0;\n\n  myEffect(() => {\n    fetch(`/api?size=${text}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const min = 0;\n\n  myEffect(() => {\n    fetch(`/api?size=${min}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const min = 0;\n\n  myEffect(() => {\n    fetch(`/api?size=${text}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const min = 0;\n\n  myEffect(() => {\n    fetch(`/api?size=${min}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const min = 0;\n\n  subscribe(() => {\n    fetch(`/api?size=${text}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const min = 0;\n\n  subscribe(() => {\n    fetch(`/api?size=${min}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_24",
     "type": "substitution",
-    "description": "page fetch — body: id→cap, array stays [id]",
-    "react_clean": "function Tabs() {\n  const [id, setId] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?page=${id}`);\n  }, [id])\n}",
-    "react_corrupted": "function Tabs() {\n  const [id, setId] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?page=${cap}`);\n  }, [id])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction tabs() {\n  const [id, setId] = useState(0);\n  const cap = 0;\n\n  subscribe(() => {\n    fetch(`/api?page=${id}`);\n  }, [id])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction tabs() {\n  const [id, setId] = useState(0);\n  const cap = 0;\n\n  subscribe(() => {\n    fetch(`/api?page=${cap}`);\n  }, [id])\n}",
-    "clean_target": " id",
-    "corrupted_target": " cap"
+    "description": "prefix-only variable tracking — callback/effect body var: id (clean) vs cap (corrupted); param=page; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "id",
+      "alt": "cap",
+      "init": "0",
+      "param": "page"
+    },
+    "clean_target": "id",
+    "corrupted_target": "cap",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Tabs",
+      "dep": " id",
+      "alt": " cap",
+      "init": "0",
+      "param": " page"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [id, setId] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?page=${id}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [id, setId] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?page=${cap}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [id, setId] = useState(0);\n  const cap = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?page=${id}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [id, setId] = useState(0);\n  const cap = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?page=${cap}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const cap = 0;\n\n  myEffect(() => {\n    fetch(`/api?page=${id}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const cap = 0;\n\n  myEffect(() => {\n    fetch(`/api?page=${cap}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const cap = 0;\n\n  myEffect(() => {\n    fetch(`/api?page=${id}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const cap = 0;\n\n  myEffect(() => {\n    fetch(`/api?page=${cap}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const cap = 0;\n\n  subscribe(() => {\n    fetch(`/api?page=${id}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const cap = 0;\n\n  subscribe(() => {\n    fetch(`/api?page=${cap}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_25",
     "type": "substitution",
-    "description": "count fetch — body: key→len, array stays [key]",
-    "react_clean": "function Menu() {\n  const [key, setKey] = useState(1);\n  const len = 1;\n\n  useEffect(() => {\n    fetch(`/api?count=${key}`);\n  }, [key])\n}",
-    "react_corrupted": "function Menu() {\n  const [key, setKey] = useState(1);\n  const len = 1;\n\n  useEffect(() => {\n    fetch(`/api?count=${len}`);\n  }, [key])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction menu() {\n  const [key, setKey] = useState(1);\n  const len = 1;\n\n  subscribe(() => {\n    fetch(`/api?count=${key}`);\n  }, [key])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction menu() {\n  const [key, setKey] = useState(1);\n  const len = 1;\n\n  subscribe(() => {\n    fetch(`/api?count=${len}`);\n  }, [key])\n}",
-    "clean_target": " key",
-    "corrupted_target": " len"
+    "description": "prefix-only variable tracking — callback/effect body var: key (clean) vs len (corrupted); param=count; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "key",
+      "alt": "len",
+      "init": "1",
+      "param": "count"
+    },
+    "clean_target": "key",
+    "corrupted_target": "len",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Menu",
+      "dep": " key",
+      "alt": " len",
+      "init": "1",
+      "param": " count"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [key, setKey] = useState(1);\n  const len = 1;\n\n  useEffect(() => {\n    fetch(`/api?count=${key}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [key, setKey] = useState(1);\n  const len = 1;\n\n  useEffect(() => {\n    fetch(`/api?count=${len}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [key, setKey] = useState(1);\n  const len = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?count=${key}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [key, setKey] = useState(1);\n  const len = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?count=${len}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [key, setKey] = useState(1);\n  const len = 1;\n\n  myEffect(() => {\n    fetch(`/api?count=${key}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [key, setKey] = useState(1);\n  const len = 1;\n\n  myEffect(() => {\n    fetch(`/api?count=${len}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [key, setKey] = useState(1);\n  const len = 1;\n\n  myEffect(() => {\n    fetch(`/api?count=${key}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [key, setKey] = useState(1);\n  const len = 1;\n\n  myEffect(() => {\n    fetch(`/api?count=${len}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [key, setKey] = useState(1);\n  const len = 1;\n\n  subscribe(() => {\n    fetch(`/api?count=${key}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [key, setKey] = useState(1);\n  const len = 1;\n\n  subscribe(() => {\n    fetch(`/api?count=${len}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_26",
     "type": "substitution",
-    "description": "limit fetch — body: name→val, array stays [name]",
-    "react_clean": "function Picker() {\n  const [name, setName] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [name])\n}",
-    "react_corrupted": "function Picker() {\n  const [name, setName] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${val}`);\n  }, [name])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction picker() {\n  const [name, setName] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${name}`);\n  }, [name])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction picker() {\n  const [name, setName] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${val}`);\n  }, [name])\n}",
-    "clean_target": " name",
-    "corrupted_target": " val"
+    "description": "prefix-only variable tracking — callback/effect body var: name (clean) vs val (corrupted); param=limit; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "name",
+      "alt": "val",
+      "init": "0",
+      "param": "limit"
+    },
+    "clean_target": "name",
+    "corrupted_target": "val",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Picker",
+      "dep": " name",
+      "alt": " val",
+      "init": "0",
+      "param": " limit"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [name, setName] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [name, setName] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${val}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [name, setName] = useState(0);\n  const val = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [name, setName] = useState(0);\n  const val = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?limit=${val}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${val}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${val}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${name}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${val}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_27",
     "type": "substitution",
-    "description": "id fetch — body: count→max, array stays [count]",
-    "react_clean": "function Slider() {\n  const [count, setCount] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${count}`);\n  }, [count])\n}",
-    "react_corrupted": "function Slider() {\n  const [count, setCount] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, [count])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction slider() {\n  const [count, setCount] = useState(0);\n  const max = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${count}`);\n  }, [count])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction slider() {\n  const [count, setCount] = useState(0);\n  const max = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${max}`);\n  }, [count])\n}",
-    "clean_target": " count",
-    "corrupted_target": " max"
+    "description": "prefix-only variable tracking — callback/effect body var: count (clean) vs max (corrupted); param=id; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "count",
+      "alt": "max",
+      "init": "0",
+      "param": "id"
+    },
+    "clean_target": "count",
+    "corrupted_target": "max",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Slider",
+      "dep": " count",
+      "alt": " max",
+      "init": "0",
+      "param": " id"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [count, setCount] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${count}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [count, setCount] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [count, setCount] = useState(0);\n  const max = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?id=${count}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [count, setCount] = useState(0);\n  const max = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [count, setCount] = useState(0);\n  const max = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${count}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [count, setCount] = useState(0);\n  const max = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [count, setCount] = useState(0);\n  const max = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${count}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [count, setCount] = useState(0);\n  const max = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [count, setCount] = useState(0);\n  const max = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${count}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [count, setCount] = useState(0);\n  const max = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_28",
     "type": "substitution",
-    "description": "visible fetch — body: mode→num, array stays [mode]",
-    "react_clean": "function Toggle() {\n  const [mode, setMode] = useState(false);\n  const num = false;\n\n  useEffect(() => {\n    fetch(`/api?visible=${mode}`);\n  }, [mode])\n}",
-    "react_corrupted": "function Toggle() {\n  const [mode, setMode] = useState(false);\n  const num = false;\n\n  useEffect(() => {\n    fetch(`/api?visible=${num}`);\n  }, [mode])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction toggle() {\n  const [mode, setMode] = useState(false);\n  const num = false;\n\n  subscribe(() => {\n    fetch(`/api?visible=${mode}`);\n  }, [mode])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction toggle() {\n  const [mode, setMode] = useState(false);\n  const num = false;\n\n  subscribe(() => {\n    fetch(`/api?visible=${num}`);\n  }, [mode])\n}",
-    "clean_target": " mode",
-    "corrupted_target": " num"
+    "description": "prefix-only variable tracking — callback/effect body var: mode (clean) vs num (corrupted); param=visible; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "mode",
+      "alt": "num",
+      "init": "false",
+      "param": "visible"
+    },
+    "clean_target": "mode",
+    "corrupted_target": "num",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Toggle",
+      "dep": " mode",
+      "alt": " num",
+      "init": " false",
+      "param": " visible"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [mode, setMode] = useState(false);\n  const num = false;\n\n  useEffect(() => {\n    fetch(`/api?visible=${mode}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [mode, setMode] = useState(false);\n  const num = false;\n\n  useEffect(() => {\n    fetch(`/api?visible=${num}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [mode, setMode] = useState(false);\n  const num = false;\n\n  useLayoutEffect(() => {\n    fetch(`/api?visible=${mode}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [mode, setMode] = useState(false);\n  const num = false;\n\n  useLayoutEffect(() => {\n    fetch(`/api?visible=${num}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const num = false;\n\n  myEffect(() => {\n    fetch(`/api?visible=${mode}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const num = false;\n\n  myEffect(() => {\n    fetch(`/api?visible=${num}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const num = false;\n\n  myEffect(() => {\n    fetch(`/api?visible=${mode}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const num = false;\n\n  myEffect(() => {\n    fetch(`/api?visible=${num}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const num = false;\n\n  subscribe(() => {\n    fetch(`/api?visible=${mode}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const num = false;\n\n  subscribe(() => {\n    fetch(`/api?visible=${num}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_29",
     "type": "substitution",
-    "description": "open fetch — body: flag→base, array stays [flag]",
-    "react_clean": "function Switch() {\n  const [flag, setFlag] = useState(true);\n  const base = true;\n\n  useEffect(() => {\n    fetch(`/api?open=${flag}`);\n  }, [flag])\n}",
-    "react_corrupted": "function Switch() {\n  const [flag, setFlag] = useState(true);\n  const base = true;\n\n  useEffect(() => {\n    fetch(`/api?open=${base}`);\n  }, [flag])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction switch() {\n  const [flag, setFlag] = useState(true);\n  const base = true;\n\n  subscribe(() => {\n    fetch(`/api?open=${flag}`);\n  }, [flag])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction switch() {\n  const [flag, setFlag] = useState(true);\n  const base = true;\n\n  subscribe(() => {\n    fetch(`/api?open=${base}`);\n  }, [flag])\n}",
-    "clean_target": " flag",
-    "corrupted_target": " base"
+    "description": "prefix-only variable tracking — callback/effect body var: flag (clean) vs base (corrupted); param=open; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "flag",
+      "alt": "base",
+      "init": "true",
+      "param": "open"
+    },
+    "clean_target": "flag",
+    "corrupted_target": "base",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Switch",
+      "dep": " flag",
+      "alt": " base",
+      "init": " true",
+      "param": " open"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [flag, setFlag] = useState(true);\n  const base = true;\n\n  useEffect(() => {\n    fetch(`/api?open=${flag}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [flag, setFlag] = useState(true);\n  const base = true;\n\n  useEffect(() => {\n    fetch(`/api?open=${base}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [flag, setFlag] = useState(true);\n  const base = true;\n\n  useLayoutEffect(() => {\n    fetch(`/api?open=${flag}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [flag, setFlag] = useState(true);\n  const base = true;\n\n  useLayoutEffect(() => {\n    fetch(`/api?open=${base}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const base = true;\n\n  myEffect(() => {\n    fetch(`/api?open=${flag}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const base = true;\n\n  myEffect(() => {\n    fetch(`/api?open=${base}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const base = true;\n\n  myEffect(() => {\n    fetch(`/api?open=${flag}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const base = true;\n\n  myEffect(() => {\n    fetch(`/api?open=${base}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const base = true;\n\n  subscribe(() => {\n    fetch(`/api?open=${flag}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const base = true;\n\n  subscribe(() => {\n    fetch(`/api?open=${base}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_30",
     "type": "substitution",
-    "description": "show fetch — body: status→ref, array stays [status]",
-    "react_clean": "function Alert() {\n  const [status, setStatus] = useState(false);\n  const ref = false;\n\n  useEffect(() => {\n    fetch(`/api?show=${status}`);\n  }, [status])\n}",
-    "react_corrupted": "function Alert() {\n  const [status, setStatus] = useState(false);\n  const ref = false;\n\n  useEffect(() => {\n    fetch(`/api?show=${ref}`);\n  }, [status])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction alert() {\n  const [status, setStatus] = useState(false);\n  const ref = false;\n\n  subscribe(() => {\n    fetch(`/api?show=${status}`);\n  }, [status])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction alert() {\n  const [status, setStatus] = useState(false);\n  const ref = false;\n\n  subscribe(() => {\n    fetch(`/api?show=${ref}`);\n  }, [status])\n}",
-    "clean_target": " status",
-    "corrupted_target": " ref"
+    "description": "prefix-only variable tracking — callback/effect body var: status (clean) vs ref (corrupted); param=show; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "status",
+      "alt": "ref",
+      "init": "false",
+      "param": "show"
+    },
+    "clean_target": "status",
+    "corrupted_target": "ref",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Alert",
+      "dep": " status",
+      "alt": " ref",
+      "init": " false",
+      "param": " show"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [status, setStatus] = useState(false);\n  const ref = false;\n\n  useEffect(() => {\n    fetch(`/api?show=${status}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [status, setStatus] = useState(false);\n  const ref = false;\n\n  useEffect(() => {\n    fetch(`/api?show=${ref}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [status, setStatus] = useState(false);\n  const ref = false;\n\n  useLayoutEffect(() => {\n    fetch(`/api?show=${status}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [status, setStatus] = useState(false);\n  const ref = false;\n\n  useLayoutEffect(() => {\n    fetch(`/api?show=${ref}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const ref = false;\n\n  myEffect(() => {\n    fetch(`/api?show=${status}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const ref = false;\n\n  myEffect(() => {\n    fetch(`/api?show=${ref}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const ref = false;\n\n  myEffect(() => {\n    fetch(`/api?show=${status}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const ref = false;\n\n  myEffect(() => {\n    fetch(`/api?show=${ref}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const ref = false;\n\n  subscribe(() => {\n    fetch(`/api?show=${status}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const ref = false;\n\n  subscribe(() => {\n    fetch(`/api?show=${ref}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_31",
     "type": "substitution",
-    "description": "index fetch — body: text→cap, array stays [text]",
-    "react_clean": "function Toast() {\n  const [text, setText] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?index=${text}`);\n  }, [text])\n}",
-    "react_corrupted": "function Toast() {\n  const [text, setText] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?index=${cap}`);\n  }, [text])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction toast() {\n  const [text, setText] = useState(0);\n  const cap = 0;\n\n  subscribe(() => {\n    fetch(`/api?index=${text}`);\n  }, [text])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction toast() {\n  const [text, setText] = useState(0);\n  const cap = 0;\n\n  subscribe(() => {\n    fetch(`/api?index=${cap}`);\n  }, [text])\n}",
-    "clean_target": " text",
-    "corrupted_target": " cap"
+    "description": "prefix-only variable tracking — callback/effect body var: text (clean) vs cap (corrupted); param=index; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "text",
+      "alt": "cap",
+      "init": "0",
+      "param": "index"
+    },
+    "clean_target": "text",
+    "corrupted_target": "cap",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Toast",
+      "dep": " text",
+      "alt": " cap",
+      "init": "0",
+      "param": " index"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [text, setText] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?index=${text}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [text, setText] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?index=${cap}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [text, setText] = useState(0);\n  const cap = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?index=${text}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [text, setText] = useState(0);\n  const cap = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?index=${cap}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const cap = 0;\n\n  myEffect(() => {\n    fetch(`/api?index=${text}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const cap = 0;\n\n  myEffect(() => {\n    fetch(`/api?index=${cap}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const cap = 0;\n\n  myEffect(() => {\n    fetch(`/api?index=${text}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const cap = 0;\n\n  myEffect(() => {\n    fetch(`/api?index=${cap}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const cap = 0;\n\n  subscribe(() => {\n    fetch(`/api?index=${text}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const cap = 0;\n\n  subscribe(() => {\n    fetch(`/api?index=${cap}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_32",
     "type": "substitution",
-    "description": "size fetch — body: page→min, array stays [page]",
-    "react_clean": "function Loader() {\n  const [page, setPage] = useState(1);\n  const min = 1;\n\n  useEffect(() => {\n    fetch(`/api?size=${page}`);\n  }, [page])\n}",
-    "react_corrupted": "function Loader() {\n  const [page, setPage] = useState(1);\n  const min = 1;\n\n  useEffect(() => {\n    fetch(`/api?size=${min}`);\n  }, [page])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction loader() {\n  const [page, setPage] = useState(1);\n  const min = 1;\n\n  subscribe(() => {\n    fetch(`/api?size=${page}`);\n  }, [page])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction loader() {\n  const [page, setPage] = useState(1);\n  const min = 1;\n\n  subscribe(() => {\n    fetch(`/api?size=${min}`);\n  }, [page])\n}",
-    "clean_target": " page",
-    "corrupted_target": " min"
+    "description": "prefix-only variable tracking — callback/effect body var: page (clean) vs min (corrupted); param=size; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "page",
+      "alt": "min",
+      "init": "1",
+      "param": "size"
+    },
+    "clean_target": "page",
+    "corrupted_target": "min",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Loader",
+      "dep": " page",
+      "alt": " min",
+      "init": "1",
+      "param": " size"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [page, setPage] = useState(1);\n  const min = 1;\n\n  useEffect(() => {\n    fetch(`/api?size=${page}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [page, setPage] = useState(1);\n  const min = 1;\n\n  useEffect(() => {\n    fetch(`/api?size=${min}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [page, setPage] = useState(1);\n  const min = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?size=${page}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [page, setPage] = useState(1);\n  const min = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?size=${min}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [page, setPage] = useState(1);\n  const min = 1;\n\n  myEffect(() => {\n    fetch(`/api?size=${page}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [page, setPage] = useState(1);\n  const min = 1;\n\n  myEffect(() => {\n    fetch(`/api?size=${min}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [page, setPage] = useState(1);\n  const min = 1;\n\n  myEffect(() => {\n    fetch(`/api?size=${page}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [page, setPage] = useState(1);\n  const min = 1;\n\n  myEffect(() => {\n    fetch(`/api?size=${min}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [page, setPage] = useState(1);\n  const min = 1;\n\n  subscribe(() => {\n    fetch(`/api?size=${page}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [page, setPage] = useState(1);\n  const min = 1;\n\n  subscribe(() => {\n    fetch(`/api?size=${min}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_33",
     "type": "substitution",
-    "description": "num fetch — body: index→val, array stays [index]",
-    "react_clean": "function Spinner() {\n  const [index, setIndex] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?num=${index}`);\n  }, [index])\n}",
-    "react_corrupted": "function Spinner() {\n  const [index, setIndex] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?num=${val}`);\n  }, [index])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction spinner() {\n  const [index, setIndex] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?num=${index}`);\n  }, [index])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction spinner() {\n  const [index, setIndex] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?num=${val}`);\n  }, [index])\n}",
-    "clean_target": " index",
-    "corrupted_target": " val"
+    "description": "prefix-only variable tracking — callback/effect body var: index (clean) vs val (corrupted); param=num; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "index",
+      "alt": "val",
+      "init": "0",
+      "param": "num"
+    },
+    "clean_target": "index",
+    "corrupted_target": "val",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Spinner",
+      "dep": " index",
+      "alt": " val",
+      "init": "0",
+      "param": " num"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [index, setIndex] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?num=${index}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [index, setIndex] = useState(0);\n  const val = 0;\n\n  useEffect(() => {\n    fetch(`/api?num=${val}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [index, setIndex] = useState(0);\n  const val = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?num=${index}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [index, setIndex] = useState(0);\n  const val = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?num=${val}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?num=${index}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?num=${val}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?num=${index}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const val = 0;\n\n  myEffect(() => {\n    fetch(`/api?num=${val}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?num=${index}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [index, setIndex] = useState(0);\n  const val = 0;\n\n  subscribe(() => {\n    fetch(`/api?num=${val}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_34",
     "type": "substitution",
-    "description": "limit fetch — body: query→len, array stays [query]",
-    "react_clean": "function Chart() {\n  const [query, setQuery] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${query}`);\n  }, [query])\n}",
-    "react_corrupted": "function Chart() {\n  const [query, setQuery] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${len}`);\n  }, [query])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction chart() {\n  const [query, setQuery] = useState(0);\n  const len = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${query}`);\n  }, [query])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction chart() {\n  const [query, setQuery] = useState(0);\n  const len = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${len}`);\n  }, [query])\n}",
-    "clean_target": " query",
-    "corrupted_target": " len"
+    "description": "prefix-only variable tracking — callback/effect body var: query (clean) vs len (corrupted); param=limit; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "query",
+      "alt": "len",
+      "init": "0",
+      "param": "limit"
+    },
+    "clean_target": "query",
+    "corrupted_target": "len",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Chart",
+      "dep": " query",
+      "alt": " len",
+      "init": "0",
+      "param": " limit"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [query, setQuery] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${query}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [query, setQuery] = useState(0);\n  const len = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${len}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [query, setQuery] = useState(0);\n  const len = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?limit=${query}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [query, setQuery] = useState(0);\n  const len = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?limit=${len}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [query, setQuery] = useState(0);\n  const len = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${query}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [query, setQuery] = useState(0);\n  const len = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${len}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [query, setQuery] = useState(0);\n  const len = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${query}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [query, setQuery] = useState(0);\n  const len = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${len}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [query, setQuery] = useState(0);\n  const len = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${query}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [query, setQuery] = useState(0);\n  const len = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${len}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_35",
     "type": "substitution",
-    "description": "id fetch — body: tag→max, array stays [tag]",
-    "react_clean": "function Map() {\n  const [tag, setTag] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${tag}`);\n  }, [tag])\n}",
-    "react_corrupted": "function Map() {\n  const [tag, setTag] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, [tag])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction map() {\n  const [tag, setTag] = useState(0);\n  const max = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${tag}`);\n  }, [tag])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction map() {\n  const [tag, setTag] = useState(0);\n  const max = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${max}`);\n  }, [tag])\n}",
-    "clean_target": " tag",
-    "corrupted_target": " max"
+    "description": "prefix-only variable tracking — callback/effect body var: tag (clean) vs max (corrupted); param=id; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "tag",
+      "alt": "max",
+      "init": "0",
+      "param": "id"
+    },
+    "clean_target": "tag",
+    "corrupted_target": "max",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Map",
+      "dep": " tag",
+      "alt": " max",
+      "init": "0",
+      "param": " id"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [tag, setTag] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${tag}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [tag, setTag] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [tag, setTag] = useState(0);\n  const max = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?id=${tag}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [tag, setTag] = useState(0);\n  const max = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const max = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${tag}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const max = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const max = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${tag}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const max = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const max = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${tag}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [tag, setTag] = useState(0);\n  const max = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_36",
     "type": "substitution",
-    "description": "count fetch — body: color→base, array stays [color]",
-    "react_clean": "function Icon() {\n  const [color, setColor] = useState(1);\n  const base = 1;\n\n  useEffect(() => {\n    fetch(`/api?count=${color}`);\n  }, [color])\n}",
-    "react_corrupted": "function Icon() {\n  const [color, setColor] = useState(1);\n  const base = 1;\n\n  useEffect(() => {\n    fetch(`/api?count=${base}`);\n  }, [color])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction icon() {\n  const [color, setColor] = useState(1);\n  const base = 1;\n\n  subscribe(() => {\n    fetch(`/api?count=${color}`);\n  }, [color])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction icon() {\n  const [color, setColor] = useState(1);\n  const base = 1;\n\n  subscribe(() => {\n    fetch(`/api?count=${base}`);\n  }, [color])\n}",
-    "clean_target": " color",
-    "corrupted_target": " base"
+    "description": "prefix-only variable tracking — callback/effect body var: color (clean) vs base (corrupted); param=count; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "color",
+      "alt": "base",
+      "init": "1",
+      "param": "count"
+    },
+    "clean_target": "color",
+    "corrupted_target": "base",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Icon",
+      "dep": " color",
+      "alt": " base",
+      "init": "1",
+      "param": " count"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [color, setColor] = useState(1);\n  const base = 1;\n\n  useEffect(() => {\n    fetch(`/api?count=${color}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [color, setColor] = useState(1);\n  const base = 1;\n\n  useEffect(() => {\n    fetch(`/api?count=${base}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [color, setColor] = useState(1);\n  const base = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?count=${color}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [color, setColor] = useState(1);\n  const base = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?count=${base}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [color, setColor] = useState(1);\n  const base = 1;\n\n  myEffect(() => {\n    fetch(`/api?count=${color}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [color, setColor] = useState(1);\n  const base = 1;\n\n  myEffect(() => {\n    fetch(`/api?count=${base}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [color, setColor] = useState(1);\n  const base = 1;\n\n  myEffect(() => {\n    fetch(`/api?count=${color}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [color, setColor] = useState(1);\n  const base = 1;\n\n  myEffect(() => {\n    fetch(`/api?count=${base}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [color, setColor] = useState(1);\n  const base = 1;\n\n  subscribe(() => {\n    fetch(`/api?count=${color}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [color, setColor] = useState(1);\n  const base = 1;\n\n  subscribe(() => {\n    fetch(`/api?count=${base}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_37",
     "type": "substitution",
-    "description": "page fetch — body: title→num, array stays [title]",
-    "react_clean": "function Label() {\n  const [title, setTitle] = useState(0);\n  const num = 0;\n\n  useEffect(() => {\n    fetch(`/api?page=${title}`);\n  }, [title])\n}",
-    "react_corrupted": "function Label() {\n  const [title, setTitle] = useState(0);\n  const num = 0;\n\n  useEffect(() => {\n    fetch(`/api?page=${num}`);\n  }, [title])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction label() {\n  const [title, setTitle] = useState(0);\n  const num = 0;\n\n  subscribe(() => {\n    fetch(`/api?page=${title}`);\n  }, [title])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction label() {\n  const [title, setTitle] = useState(0);\n  const num = 0;\n\n  subscribe(() => {\n    fetch(`/api?page=${num}`);\n  }, [title])\n}",
-    "clean_target": " title",
-    "corrupted_target": " num"
+    "description": "prefix-only variable tracking — callback/effect body var: title (clean) vs num (corrupted); param=page; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "title",
+      "alt": "num",
+      "init": "0",
+      "param": "page"
+    },
+    "clean_target": "title",
+    "corrupted_target": "num",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Label",
+      "dep": " title",
+      "alt": " num",
+      "init": "0",
+      "param": " page"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [title, setTitle] = useState(0);\n  const num = 0;\n\n  useEffect(() => {\n    fetch(`/api?page=${title}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [title, setTitle] = useState(0);\n  const num = 0;\n\n  useEffect(() => {\n    fetch(`/api?page=${num}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [title, setTitle] = useState(0);\n  const num = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?page=${title}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [title, setTitle] = useState(0);\n  const num = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?page=${num}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [title, setTitle] = useState(0);\n  const num = 0;\n\n  myEffect(() => {\n    fetch(`/api?page=${title}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [title, setTitle] = useState(0);\n  const num = 0;\n\n  myEffect(() => {\n    fetch(`/api?page=${num}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [title, setTitle] = useState(0);\n  const num = 0;\n\n  myEffect(() => {\n    fetch(`/api?page=${title}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [title, setTitle] = useState(0);\n  const num = 0;\n\n  myEffect(() => {\n    fetch(`/api?page=${num}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [title, setTitle] = useState(0);\n  const num = 0;\n\n  subscribe(() => {\n    fetch(`/api?page=${title}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [title, setTitle] = useState(0);\n  const num = 0;\n\n  subscribe(() => {\n    fetch(`/api?page=${num}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_38",
     "type": "substitution",
-    "description": "index fetch — body: key→ref, array stays [key]",
-    "react_clean": "function Link() {\n  const [key, setKey] = useState(0);\n  const ref = 0;\n\n  useEffect(() => {\n    fetch(`/api?index=${key}`);\n  }, [key])\n}",
-    "react_corrupted": "function Link() {\n  const [key, setKey] = useState(0);\n  const ref = 0;\n\n  useEffect(() => {\n    fetch(`/api?index=${ref}`);\n  }, [key])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction link() {\n  const [key, setKey] = useState(0);\n  const ref = 0;\n\n  subscribe(() => {\n    fetch(`/api?index=${key}`);\n  }, [key])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction link() {\n  const [key, setKey] = useState(0);\n  const ref = 0;\n\n  subscribe(() => {\n    fetch(`/api?index=${ref}`);\n  }, [key])\n}",
-    "clean_target": " key",
-    "corrupted_target": " ref"
+    "description": "prefix-only variable tracking — callback/effect body var: key (clean) vs ref (corrupted); param=index; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "key",
+      "alt": "ref",
+      "init": "0",
+      "param": "index"
+    },
+    "clean_target": "key",
+    "corrupted_target": "ref",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Link",
+      "dep": " key",
+      "alt": " ref",
+      "init": "0",
+      "param": " index"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [key, setKey] = useState(0);\n  const ref = 0;\n\n  useEffect(() => {\n    fetch(`/api?index=${key}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [key, setKey] = useState(0);\n  const ref = 0;\n\n  useEffect(() => {\n    fetch(`/api?index=${ref}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [key, setKey] = useState(0);\n  const ref = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?index=${key}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [key, setKey] = useState(0);\n  const ref = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?index=${ref}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [key, setKey] = useState(0);\n  const ref = 0;\n\n  myEffect(() => {\n    fetch(`/api?index=${key}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [key, setKey] = useState(0);\n  const ref = 0;\n\n  myEffect(() => {\n    fetch(`/api?index=${ref}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [key, setKey] = useState(0);\n  const ref = 0;\n\n  myEffect(() => {\n    fetch(`/api?index=${key}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [key, setKey] = useState(0);\n  const ref = 0;\n\n  myEffect(() => {\n    fetch(`/api?index=${ref}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [key, setKey] = useState(0);\n  const ref = 0;\n\n  subscribe(() => {\n    fetch(`/api?index=${key}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [key, setKey] = useState(0);\n  const ref = 0;\n\n  subscribe(() => {\n    fetch(`/api?index=${ref}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_39",
     "type": "substitution",
-    "description": "size fetch — body: id→min, array stays [id]",
-    "react_clean": "function Image() {\n  const [id, setId] = useState(0);\n  const min = 0;\n\n  useEffect(() => {\n    fetch(`/api?size=${id}`);\n  }, [id])\n}",
-    "react_corrupted": "function Image() {\n  const [id, setId] = useState(0);\n  const min = 0;\n\n  useEffect(() => {\n    fetch(`/api?size=${min}`);\n  }, [id])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction image() {\n  const [id, setId] = useState(0);\n  const min = 0;\n\n  subscribe(() => {\n    fetch(`/api?size=${id}`);\n  }, [id])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction image() {\n  const [id, setId] = useState(0);\n  const min = 0;\n\n  subscribe(() => {\n    fetch(`/api?size=${min}`);\n  }, [id])\n}",
-    "clean_target": " id",
-    "corrupted_target": " min"
+    "description": "prefix-only variable tracking — callback/effect body var: id (clean) vs min (corrupted); param=size; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "id",
+      "alt": "min",
+      "init": "0",
+      "param": "size"
+    },
+    "clean_target": "id",
+    "corrupted_target": "min",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Image",
+      "dep": " id",
+      "alt": " min",
+      "init": "0",
+      "param": " size"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [id, setId] = useState(0);\n  const min = 0;\n\n  useEffect(() => {\n    fetch(`/api?size=${id}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [id, setId] = useState(0);\n  const min = 0;\n\n  useEffect(() => {\n    fetch(`/api?size=${min}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [id, setId] = useState(0);\n  const min = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?size=${id}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [id, setId] = useState(0);\n  const min = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?size=${min}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const min = 0;\n\n  myEffect(() => {\n    fetch(`/api?size=${id}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const min = 0;\n\n  myEffect(() => {\n    fetch(`/api?size=${min}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const min = 0;\n\n  myEffect(() => {\n    fetch(`/api?size=${id}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const min = 0;\n\n  myEffect(() => {\n    fetch(`/api?size=${min}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const min = 0;\n\n  subscribe(() => {\n    fetch(`/api?size=${id}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [id, setId] = useState(0);\n  const min = 0;\n\n  subscribe(() => {\n    fetch(`/api?size=${min}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_40",
     "type": "substitution",
-    "description": "limit fetch — body: name→cap, array stays [name]",
-    "react_clean": "function Video() {\n  const [name, setName] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [name])\n}",
-    "react_corrupted": "function Video() {\n  const [name, setName] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${cap}`);\n  }, [name])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction video() {\n  const [name, setName] = useState(0);\n  const cap = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${name}`);\n  }, [name])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction video() {\n  const [name, setName] = useState(0);\n  const cap = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${cap}`);\n  }, [name])\n}",
-    "clean_target": " name",
-    "corrupted_target": " cap"
+    "description": "prefix-only variable tracking — callback/effect body var: name (clean) vs cap (corrupted); param=limit; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "name",
+      "alt": "cap",
+      "init": "0",
+      "param": "limit"
+    },
+    "clean_target": "name",
+    "corrupted_target": "cap",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Video",
+      "dep": " name",
+      "alt": " cap",
+      "init": "0",
+      "param": " limit"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [name, setName] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [name, setName] = useState(0);\n  const cap = 0;\n\n  useEffect(() => {\n    fetch(`/api?limit=${cap}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [name, setName] = useState(0);\n  const cap = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [name, setName] = useState(0);\n  const cap = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?limit=${cap}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const cap = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const cap = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${cap}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const cap = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${name}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const cap = 0;\n\n  myEffect(() => {\n    fetch(`/api?limit=${cap}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const cap = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${name}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [name, setName] = useState(0);\n  const cap = 0;\n\n  subscribe(() => {\n    fetch(`/api?limit=${cap}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_41",
     "type": "substitution",
-    "description": "enabled fetch — body: mode→len, array stays [mode]",
-    "react_clean": "function Canvas() {\n  const [mode, setMode] = useState(false);\n  const len = false;\n\n  useEffect(() => {\n    fetch(`/api?enabled=${mode}`);\n  }, [mode])\n}",
-    "react_corrupted": "function Canvas() {\n  const [mode, setMode] = useState(false);\n  const len = false;\n\n  useEffect(() => {\n    fetch(`/api?enabled=${len}`);\n  }, [mode])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction canvas() {\n  const [mode, setMode] = useState(false);\n  const len = false;\n\n  subscribe(() => {\n    fetch(`/api?enabled=${mode}`);\n  }, [mode])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction canvas() {\n  const [mode, setMode] = useState(false);\n  const len = false;\n\n  subscribe(() => {\n    fetch(`/api?enabled=${len}`);\n  }, [mode])\n}",
-    "clean_target": " mode",
-    "corrupted_target": " len"
+    "description": "prefix-only variable tracking — callback/effect body var: mode (clean) vs len (corrupted); param=enabled; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "mode",
+      "alt": "len",
+      "init": "false",
+      "param": "enabled"
+    },
+    "clean_target": "mode",
+    "corrupted_target": "len",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Canvas",
+      "dep": " mode",
+      "alt": " len",
+      "init": " false",
+      "param": " enabled"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [mode, setMode] = useState(false);\n  const len = false;\n\n  useEffect(() => {\n    fetch(`/api?enabled=${mode}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [mode, setMode] = useState(false);\n  const len = false;\n\n  useEffect(() => {\n    fetch(`/api?enabled=${len}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [mode, setMode] = useState(false);\n  const len = false;\n\n  useLayoutEffect(() => {\n    fetch(`/api?enabled=${mode}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [mode, setMode] = useState(false);\n  const len = false;\n\n  useLayoutEffect(() => {\n    fetch(`/api?enabled=${len}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const len = false;\n\n  myEffect(() => {\n    fetch(`/api?enabled=${mode}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const len = false;\n\n  myEffect(() => {\n    fetch(`/api?enabled=${len}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const len = false;\n\n  myEffect(() => {\n    fetch(`/api?enabled=${mode}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const len = false;\n\n  myEffect(() => {\n    fetch(`/api?enabled=${len}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const len = false;\n\n  subscribe(() => {\n    fetch(`/api?enabled=${mode}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [mode, setMode] = useState(false);\n  const len = false;\n\n  subscribe(() => {\n    fetch(`/api?enabled=${len}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_42",
     "type": "substitution",
-    "description": "id fetch — body: text→max, array stays [text]",
-    "react_clean": "function Editor() {\n  const [text, setText] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${text}`);\n  }, [text])\n}",
-    "react_corrupted": "function Editor() {\n  const [text, setText] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, [text])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction editor() {\n  const [text, setText] = useState(0);\n  const max = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${text}`);\n  }, [text])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction editor() {\n  const [text, setText] = useState(0);\n  const max = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${max}`);\n  }, [text])\n}",
-    "clean_target": " text",
-    "corrupted_target": " max"
+    "description": "prefix-only variable tracking — callback/effect body var: text (clean) vs max (corrupted); param=id; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "text",
+      "alt": "max",
+      "init": "0",
+      "param": "id"
+    },
+    "clean_target": "text",
+    "corrupted_target": "max",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Editor",
+      "dep": " text",
+      "alt": " max",
+      "init": "0",
+      "param": " id"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [text, setText] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${text}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [text, setText] = useState(0);\n  const max = 0;\n\n  useEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [text, setText] = useState(0);\n  const max = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?id=${text}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [text, setText] = useState(0);\n  const max = 0;\n\n  useLayoutEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const max = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${text}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const max = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const max = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${text}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const max = 0;\n\n  myEffect(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const max = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${text}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [text, setText] = useState(0);\n  const max = 0;\n\n  subscribe(() => {\n    fetch(`/api?id=${max}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_43",
     "type": "substitution",
-    "description": "index fetch — body: count→ref, array stays [count]",
-    "react_clean": "function Preview() {\n  const [count, setCount] = useState(1);\n  const ref = 1;\n\n  useEffect(() => {\n    fetch(`/api?index=${count}`);\n  }, [count])\n}",
-    "react_corrupted": "function Preview() {\n  const [count, setCount] = useState(1);\n  const ref = 1;\n\n  useEffect(() => {\n    fetch(`/api?index=${ref}`);\n  }, [count])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction preview() {\n  const [count, setCount] = useState(1);\n  const ref = 1;\n\n  subscribe(() => {\n    fetch(`/api?index=${count}`);\n  }, [count])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction preview() {\n  const [count, setCount] = useState(1);\n  const ref = 1;\n\n  subscribe(() => {\n    fetch(`/api?index=${ref}`);\n  }, [count])\n}",
-    "clean_target": " count",
-    "corrupted_target": " ref"
+    "description": "prefix-only variable tracking — callback/effect body var: count (clean) vs ref (corrupted); param=index; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "count",
+      "alt": "ref",
+      "init": "1",
+      "param": "index"
+    },
+    "clean_target": "count",
+    "corrupted_target": "ref",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Preview",
+      "dep": " count",
+      "alt": " ref",
+      "init": "1",
+      "param": " index"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [count, setCount] = useState(1);\n  const ref = 1;\n\n  useEffect(() => {\n    fetch(`/api?index=${count}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [count, setCount] = useState(1);\n  const ref = 1;\n\n  useEffect(() => {\n    fetch(`/api?index=${ref}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [count, setCount] = useState(1);\n  const ref = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?index=${count}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [count, setCount] = useState(1);\n  const ref = 1;\n\n  useLayoutEffect(() => {\n    fetch(`/api?index=${ref}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [count, setCount] = useState(1);\n  const ref = 1;\n\n  myEffect(() => {\n    fetch(`/api?index=${count}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [count, setCount] = useState(1);\n  const ref = 1;\n\n  myEffect(() => {\n    fetch(`/api?index=${ref}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [count, setCount] = useState(1);\n  const ref = 1;\n\n  myEffect(() => {\n    fetch(`/api?index=${count}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [count, setCount] = useState(1);\n  const ref = 1;\n\n  myEffect(() => {\n    fetch(`/api?index=${ref}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [count, setCount] = useState(1);\n  const ref = 1;\n\n  subscribe(() => {\n    fetch(`/api?index=${count}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [count, setCount] = useState(1);\n  const ref = 1;\n\n  subscribe(() => {\n    fetch(`/api?index=${ref}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_44",
     "type": "substitution",
-    "description": "active fetch — body: status→base, array stays [status]",
-    "react_clean": "function Filter() {\n  const [status, setStatus] = useState(false);\n  const base = false;\n\n  useEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [status])\n}",
-    "react_corrupted": "function Filter() {\n  const [status, setStatus] = useState(false);\n  const base = false;\n\n  useEffect(() => {\n    fetch(`/api?active=${base}`);\n  }, [status])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction filter() {\n  const [status, setStatus] = useState(false);\n  const base = false;\n\n  subscribe(() => {\n    fetch(`/api?active=${status}`);\n  }, [status])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction filter() {\n  const [status, setStatus] = useState(false);\n  const base = false;\n\n  subscribe(() => {\n    fetch(`/api?active=${base}`);\n  }, [status])\n}",
-    "clean_target": " status",
-    "corrupted_target": " base"
+    "description": "prefix-only variable tracking — callback/effect body var: status (clean) vs base (corrupted); param=active; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "status",
+      "alt": "base",
+      "init": "false",
+      "param": "active"
+    },
+    "clean_target": "status",
+    "corrupted_target": "base",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Filter",
+      "dep": " status",
+      "alt": " base",
+      "init": " false",
+      "param": " active"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [status, setStatus] = useState(false);\n  const base = false;\n\n  useEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [status, setStatus] = useState(false);\n  const base = false;\n\n  useEffect(() => {\n    fetch(`/api?active=${base}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [status, setStatus] = useState(false);\n  const base = false;\n\n  useLayoutEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [status, setStatus] = useState(false);\n  const base = false;\n\n  useLayoutEffect(() => {\n    fetch(`/api?active=${base}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const base = false;\n\n  myEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const base = false;\n\n  myEffect(() => {\n    fetch(`/api?active=${base}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const base = false;\n\n  myEffect(() => {\n    fetch(`/api?active=${status}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const base = false;\n\n  myEffect(() => {\n    fetch(`/api?active=${base}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const base = false;\n\n  subscribe(() => {\n    fetch(`/api?active=${status}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [status, setStatus] = useState(false);\n  const base = false;\n\n  subscribe(() => {\n    fetch(`/api?active=${base}`);\n  }, ["
+      }
+    }
   },
   {
     "id": "sub_45",
     "type": "substitution",
-    "description": "show fetch — body: flag→cap, array stays [flag]",
-    "react_clean": "function Viewer() {\n  const [flag, setFlag] = useState(true);\n  const cap = true;\n\n  useEffect(() => {\n    fetch(`/api?show=${flag}`);\n  }, [flag])\n}",
-    "react_corrupted": "function Viewer() {\n  const [flag, setFlag] = useState(true);\n  const cap = true;\n\n  useEffect(() => {\n    fetch(`/api?show=${cap}`);\n  }, [flag])\n}",
-    "js_clean": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction viewer() {\n  const [flag, setFlag] = useState(true);\n  const cap = true;\n\n  subscribe(() => {\n    fetch(`/api?show=${flag}`);\n  }, [flag])\n}",
-    "js_corrupted": "function subscribe(callback, deps) { deps.forEach(d => callback(d)); }\n\nfunction viewer() {\n  const [flag, setFlag] = useState(true);\n  const cap = true;\n\n  subscribe(() => {\n    fetch(`/api?show=${cap}`);\n  }, [flag])\n}",
-    "clean_target": " flag",
-    "corrupted_target": " cap"
+    "description": "prefix-only variable tracking — callback/effect body var: flag (clean) vs cap (corrupted); param=show; prefix ends at open_bracket '['",
+    "vars": {
+      "Component": "Component",
+      "dep": "flag",
+      "alt": "cap",
+      "init": "true",
+      "param": "show"
+    },
+    "clean_target": "flag",
+    "corrupted_target": "cap",
+    "close_target": "]",
+    "token_forms": {
+      "Component": " Viewer",
+      "dep": " flag",
+      "alt": " cap",
+      "init": " true",
+      "param": " show"
+    },
+    "conditions": {
+      "useEffect": {
+        "clean": "function Component() {\n  const [flag, setFlag] = useState(true);\n  const cap = true;\n\n  useEffect(() => {\n    fetch(`/api?show=${flag}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [flag, setFlag] = useState(true);\n  const cap = true;\n\n  useEffect(() => {\n    fetch(`/api?show=${cap}`);\n  }, ["
+      },
+      "useLayoutEffect": {
+        "clean": "function Component() {\n  const [flag, setFlag] = useState(true);\n  const cap = true;\n\n  useLayoutEffect(() => {\n    fetch(`/api?show=${flag}`);\n  }, [",
+        "corrupted": "function Component() {\n  const [flag, setFlag] = useState(true);\n  const cap = true;\n\n  useLayoutEffect(() => {\n    fetch(`/api?show=${cap}`);\n  }, ["
+      },
+      "alias": {
+        "clean": "const myEffect = useEffect;\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const cap = true;\n\n  myEffect(() => {\n    fetch(`/api?show=${flag}`);\n  }, [",
+        "corrupted": "const myEffect = useEffect;\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const cap = true;\n\n  myEffect(() => {\n    fetch(`/api?show=${cap}`);\n  }, ["
+      },
+      "alias_ctrl": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const cap = true;\n\n  myEffect(() => {\n    fetch(`/api?show=${flag}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nconst myEffect = subscribe;\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const cap = true;\n\n  myEffect(() => {\n    fetch(`/api?show=${cap}`);\n  }, ["
+      },
+      "subscribe": {
+        "clean": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const cap = true;\n\n  subscribe(() => {\n    fetch(`/api?show=${flag}`);\n  }, [",
+        "corrupted": "function subscribe(callback, values) {\n  callback();\n}\n\nfunction Component() {\n  const [flag, setFlag] = useState(true);\n  const cap = true;\n\n  subscribe(() => {\n    fetch(`/api?show=${cap}`);\n  }, ["
+      }
+    }
   }
 ]
