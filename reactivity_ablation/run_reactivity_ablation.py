@@ -431,8 +431,13 @@ def load_tokenizers(auto_tokenizer: Any, local_files_only: bool) -> tuple[Availa
 
 
 def torch_dtype_for_device(torch: Any, device: str) -> Any:
-    if device in ("cuda", "mps"):
-        return torch.float16
+    # float16 has a narrow dynamic range and is known to overflow to NaN/Inf
+    # mid-forward-pass on models with large activation norms (Gemma in
+    # particular). bfloat16 has float32's exponent range and is the safe
+    # reduced-precision choice; fall back to float32 where bf16 isn't
+    # available rather than risking silent NaN logits.
+    if device == "cuda" and torch.cuda.is_bf16_supported():
+        return torch.bfloat16
     return torch.float32
 
 
@@ -528,8 +533,28 @@ def measure_logits(
             torch.cuda.empty_cache()
 
     df = pd.DataFrame(records)
+    assert_finite_logits(df)
     assert_resign_sanity(df)
     return df
+
+
+def assert_finite_logits(df: pd.DataFrame) -> None:
+    """Fail loudly on non-finite logits instead of letting NaN propagate.
+
+    NaN compared with `> 0` is False, so a silently-NaN LD_stateform column
+    shows up downstream as frac_pos == 0.0 with every summary stat NaN --
+    indistinguishable at a glance from "no effect" unless caught here.
+    """
+    cols = ["logit_dep", "logit_alt", "logit_target", "logit_control", "D", "LD_stateform"]
+    bad = df[~np.isfinite(df[cols]).all(axis=1)]
+    if not bad.empty:
+        by_model = bad.groupby("model").size().to_dict()
+        sample = bad[["model", "cell_id"]].head(5).to_dict("records")
+        raise RuntimeError(
+            f"Non-finite logits (NaN/Inf) in {len(bad)}/{len(df)} rows, by model: {by_model}. "
+            f"Sample: {sample}. Likely cause: forward-pass overflow in the model's compute "
+            f"dtype (e.g. float16) -- see torch_dtype_for_device."
+        )
 
 
 def assert_resign_sanity(df: pd.DataFrame) -> None:
