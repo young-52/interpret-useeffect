@@ -10,9 +10,8 @@
 
 ## Token/Model Availability
 
-- local model stack/tokenizers: unavailable
-- reason: `model stack unavailable: No module named 'torch'`
-- token validation: not run (model stack unavailable)
+- local model stack/tokenizers: available
+- token validation: passed
 - token-validation failures: 0
 - failed pairs flagged for dropping: 0
 

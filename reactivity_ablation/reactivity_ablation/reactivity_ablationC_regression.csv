@@ -1,0 +1,15 @@
+model,dependent_var,subset,term,estimate,std_err,ci_low,ci_high,p_value
+gemma3-1b-pt,D,bodyuse=both,const,,,,,
+gemma3-1b-pt,D,bodyuse=both,pos_dep_first_code,,,,,
+gemma3-1b-pt,D,bodyuse=both,role_dep_useState_form_code,,,,,
+gemma3-1b-pt,D,bodyuse=both,decl_dep_first_code,,,,,
+gemma3-1b-pt,D,bodyuse=both,condition_subscribe,,,,,
+gemma3-1b-pt,D,bodyuse=both,role_x_subscribe,,,,,
+gemma3-1b-pt,D,bodyuse=both,distance_c,,,,,
+llama3.2-1b,D,bodyuse=both,const,0.4750000000000008,0.1005873396725259,0.27785243694115314,0.6721475630588485,2.332333487429205e-06
+llama3.2-1b,D,bodyuse=both,pos_dep_first_code,0.26206597222222316,0.04573214108198132,0.17243262276563515,0.3516993216788112,1.001616531861861e-08
+llama3.2-1b,D,bodyuse=both,role_dep_useState_form_code,0.8161458333333306,0.047378332604376634,0.7232860077811926,0.9090056588854686,1.6906100746127866e-66
+llama3.2-1b,D,bodyuse=both,decl_dep_first_code,0.32430555555555457,0.020831764502193165,0.283476047396836,0.3651350637142731,1.2040690943000939e-54
+llama3.2-1b,D,bodyuse=both,condition_subscribe,-0.3747395833333347,0.06544656717297957,-0.503012497904156,-0.24646666876251333,1.0289529661443924e-08
+llama3.2-1b,D,bodyuse=both,role_x_subscribe,0.3203993055555595,0.026504552258668834,0.26845133770220886,0.37234727340891016,1.215388277112609e-33
+llama3.2-1b,D,bodyuse=both,distance_c,0.0,0.0,0.0,0.0,
