@@ -707,6 +707,19 @@ def stage_a_ablation_b(df_b: pd.DataFrame, bootstrap_samples: int) -> dict[str, 
     return {"pair_means": pair_means, "one_sample": one_sample, "paired_vs_useEffect": paired_vs_useeffect}
 
 
+def center_distance(values: pd.Series) -> pd.Series:
+    """Mean-center the decl-to-bracket distance covariate.
+
+    Deliberately not z-scored: scipy.stats.zscore hits a catastrophic-
+    cancellation failure mode (returns NaN for every row) when the values are
+    tightly clustered, which this covariate often is within a single model's
+    subset. Mean-centering only needs a subtraction, so it can't divide by a
+    near-zero std and can't produce NaN/inf.
+    """
+    x = values.astype(float)
+    return x - x.mean()
+
+
 def regression_c(df_c: pd.DataFrame) -> pd.DataFrame:
     import statsmodels.api as sm
 
@@ -719,7 +732,7 @@ def regression_c(df_c: pd.DataFrame) -> pd.DataFrame:
         work["decl_dep_first_code"] = np.where(work["decl_dep_first"], 1.0, -1.0)
         work["condition_subscribe"] = (work["condition"] == "subscribe").astype(float)
         work["role_x_subscribe"] = work["role_dep_useState_form_code"] * work["condition_subscribe"]
-        work["distance_z"] = stats.zscore(work["decl_to_bracket_token_distance"].astype(float))
+        work["distance_c"] = center_distance(work["decl_to_bracket_token_distance"])
 
         feature_cols = [
             "pos_dep_first_code",
@@ -727,7 +740,7 @@ def regression_c(df_c: pd.DataFrame) -> pd.DataFrame:
             "decl_dep_first_code",
             "condition_subscribe",
             "role_x_subscribe",
-            "distance_z",
+            "distance_c",
         ]
         x = sm.add_constant(work[feature_cols], has_constant="add")
         y = work["D"].astype(float)
@@ -758,9 +771,9 @@ def regression_b(df_b: pd.DataFrame) -> pd.DataFrame:
         work = group.copy()
         work["role_dep_useState_form_code"] = np.where(work["role_dep_useState_form"], 1.0, -1.0)
         work["decl_dep_first_code"] = np.where(work["decl_dep_first"], 1.0, -1.0)
-        work["distance_z"] = stats.zscore(work["decl_to_bracket_token_distance"].astype(float))
+        work["distance_c"] = center_distance(work["decl_to_bracket_token_distance"])
 
-        feature_cols = ["role_dep_useState_form_code", "decl_dep_first_code", "distance_z"]
+        feature_cols = ["role_dep_useState_form_code", "decl_dep_first_code", "distance_c"]
         for context in B_CONTEXTS[1:]:
             col = f"condition_{context}"
             work[col] = (work["condition"] == context).astype(float)
@@ -974,7 +987,7 @@ def write_ablation_c_outputs(out_dir: Path, df_c: pd.DataFrame, bootstrap_sample
         )
     )
     lines.extend(["", "## Optional regression (bodyuse=both subset, decl_to_bracket distance as covariate)", ""])
-    key_terms = reg[reg["term"].str.contains("role_dep_useState_form|distance_z", regex=True)]
+    key_terms = reg[reg["term"].str.contains("role_dep_useState_form|distance_c", regex=True)]
     lines.extend(
         markdown_table(
             key_terms,
