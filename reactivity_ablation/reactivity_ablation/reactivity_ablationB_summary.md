@@ -16,29 +16,29 @@ to callback-array completion, not dependency-array completion specifically.
 
 ## Stage A: pair-level mean per context
 
-| model        | condition    |   n_pairs |      mean |    median |   frac_pos |   mean_boot_ci95_low |   mean_boot_ci95_high |    cohend |
-|:-------------|:-------------|----------:|----------:|----------:|-----------:|---------------------:|----------------------:|----------:|
-| gemma3-1b-pt | plain_array  |        45 | nan       | nan       |   0        |            nan       |             nan       | nan       |
-| gemma3-1b-pt | return_array |        45 | nan       | nan       |   0        |            nan       |             nan       | nan       |
-| gemma3-1b-pt | subscribe    |        45 | nan       | nan       |   0        |            nan       |             nan       | nan       |
-| gemma3-1b-pt | useEffect    |        45 | nan       | nan       |   0        |            nan       |             nan       | nan       |
-| llama3.2-1b  | plain_array  |        45 |   1.42439 |   1.42969 |   1        |              1.29601 |               1.55859 |   3.20705 |
-| llama3.2-1b  | return_array |        45 |   2.96319 |   2.96875 |   1        |              2.83759 |               3.08612 |   6.76402 |
-| llama3.2-1b  | subscribe    |        45 |   1.19262 |   1.27734 |   1        |              1.07248 |               1.30565 |   3.0004  |
-| llama3.2-1b  | useEffect    |        45 |   1.2842  |   1.28516 |   0.977778 |              1.14253 |               1.41823 |   2.66804 |
+| model        | condition    |   n_pairs |     mean |   median |   frac_pos |   mean_boot_ci95_low |   mean_boot_ci95_high |   cohend |
+|:-------------|:-------------|----------:|---------:|---------:|-----------:|---------------------:|----------------------:|---------:|
+| gemma3-1b-pt | plain_array  |        45 | 1.1125   | 1.09375  |   1        |             0.995833 |              1.23195  |  2.72743 |
+| gemma3-1b-pt | return_array |        45 | 0.748958 | 0.765625 |   1        |             0.6625   |              0.835764 |  2.49848 |
+| gemma3-1b-pt | subscribe    |        45 | 2.22917  | 2.1875   |   1        |             2.11492  |              2.34444  |  5.54052 |
+| gemma3-1b-pt | useEffect    |        45 | 2.35451  | 2.34375  |   1        |             2.24271  |              2.47188  |  5.99089 |
+| llama3.2-1b  | plain_array  |        45 | 1.42778  | 1.40625  |   1        |             1.29722  |              1.5625   |  3.20357 |
+| llama3.2-1b  | return_array |        45 | 2.96597  | 3        |   1        |             2.84026  |              3.09097  |  6.77558 |
+| llama3.2-1b  | subscribe    |        45 | 1.19097  | 1.21875  |   1        |             1.0729   |              1.30208  |  3.03536 |
+| llama3.2-1b  | useEffect    |        45 | 1.29028  | 1.28125  |   0.977778 |             1.15207  |              1.42014  |  2.75996 |
 
 ## Paired contrast vs. useEffect baseline
 
-| model        | condition    |   n |   mean_diff_vs_baseline |         t |   p_twosided |     cohend |
-|:-------------|:-------------|----:|------------------------:|----------:|-------------:|-----------:|
-| gemma3-1b-pt | plain_array  |  45 |             nan         | nan       | nan          | nan        |
-| gemma3-1b-pt | return_array |  45 |             nan         | nan       | nan          | nan        |
-| gemma3-1b-pt | subscribe    |  45 |             nan         | nan       | nan          | nan        |
-| gemma3-1b-pt | useEffect    |  45 |               0         | nan       | nan          | nan        |
-| llama3.2-1b  | plain_array  |  45 |               0.140191  |   1.88768 |   0.0656746  |   0.281399 |
-| llama3.2-1b  | return_array |  45 |               1.67899   |  24.0298  |   6.2272e-27 |   3.58215  |
-| llama3.2-1b  | subscribe    |  45 |              -0.0915799 |  -2.58014 |   0.0132909  |  -0.384625 |
-| llama3.2-1b  | useEffect    |  45 |               0         | nan       | nan          | nan        |
+| model        | condition    |   n |   mean_diff_vs_baseline |         t |    p_twosided |     cohend |
+|:-------------|:-------------|----:|------------------------:|----------:|--------------:|-----------:|
+| gemma3-1b-pt | plain_array  |  45 |              -1.24201   | -16.8062  |   9.11458e-21 |  -2.50532  |
+| gemma3-1b-pt | return_array |  45 |              -1.60556   | -28.6621  |   4.21174e-30 |  -4.2727   |
+| gemma3-1b-pt | subscribe    |  45 |              -0.125347  |  -3.41146 |   0.0013957   |  -0.508551 |
+| gemma3-1b-pt | useEffect    |  45 |               0         | nan       | nan           | nan        |
+| llama3.2-1b  | plain_array  |  45 |               0.1375    |   1.86348 |   0.0690774   |   0.277791 |
+| llama3.2-1b  | return_array |  45 |               1.67569   |  23.9702  |   6.89354e-27 |   3.57327  |
+| llama3.2-1b  | subscribe    |  45 |              -0.0993056 |  -2.78139 |   0.0079394   |  -0.414625 |
+| llama3.2-1b  | useEffect    |  45 |               0         | nan       | nan           | nan        |
 
 ## Outputs
 
